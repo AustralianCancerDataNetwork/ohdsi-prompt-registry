@@ -79,7 +79,9 @@ These are three ways to distribute the same kind of pack. They are not three man
 | Installed | Versioned content shipped by another Python distribution. | Middle |
 | Filesystem | Site-owned content, local development, or an intentional override. | Highest |
 
-If two valid packs have the same `name`, the later source replaces the earlier one: filesystem > installed > bundled. The registry reports the replaced pack as a shadow in `ohdsi_prompt_registry_status`; it does not merge files from both copies. A malformed pack is rejected independently, so it cannot prevent sibling packs from loading.
+If two valid packs have the same `name`, the later source replaces the earlier one: filesystem > installed > bundled. The registry reports the replaced pack as a shadow in `ohdsi_prompt_registry_status`; it does not merge files from both copies. This can be done intentionally to override defaults with site-specific handling as required.
+
+A malformed pack is rejected independently, so it cannot prevent sibling packs from loading.
 
 ### 1. Bundled packs
 
