@@ -17,21 +17,21 @@ If information is missing to complete *any* derived template, you must gather it
 Only begin this phase when all necessary information is explicitly defined and agreed upon.
 1. Extract relevant analyses and populate parameters required for each template (set unused to null).
 2. Cohorts should be identified by a short, descriptive string (e.g., 'new users of ibuprofen'). Do not invent these; base them strictly on your conversation with the user.
-3. You MUST call the `validate_study_intent` tool with your proposed JSON string.
+3. You MUST call `ohdsi_prompt_registry_validate` with `pack: ohdsi-question-templates`, `schema: study_intent`, and your proposed JSON string as `document`.
 4. If the tool returns an error, self-correct and re-validate until successful.
 
 # PHASE 3: Workspace Artifact
-Once validation succeeds, use your native workspace file capabilities to save the valid JSON to a new file named `study_intent_<topic>.json`.
+Once validation succeeds, use native workspace file capabilities, when available, to save the valid JSON to a new file named `study_intent_<topic>.json`. If the client has no workspace file capability, retain the validated JSON in the conversation, present it in a fenced JSON block, and continue without claiming that a file was saved.
 
 # PHASE 4: Presentation
-After saving the file, call the `render_study_intent_markdown` tool using the valid JSON string.
+After preserving the validated JSON, call `ohdsi_prompt_registry_render` with `pack: ohdsi-question-templates`, `render: study_intent`, the valid JSON string as `document`, and `format: markdown`.
 - You MUST output this Markdown directly to the user in the chat so they can review the human-readable summary.
 - Ask the user: "Would you like to make any changes to this study intent?"
 - [STOP AND WAIT] for the user's review.
 
 # PHASE 5: Iterative Refinement
-- If the user requests changes via chat, update the JSON, re-validate it using the tool, overwrite the local file, and re-render the Markdown.
-- If the user manually edits the local JSON file, read the updated file contents from the workspace, pass that JSON string to the `validate_study_intent` tool to ensure their edits are valid, and call `render_study_intent_markdown` to provide an updated summary.
+- If the user requests changes via chat, update the JSON, re-validate it with `ohdsi_prompt_registry_validate`, overwrite the local file when one was created, and re-render the Markdown with `ohdsi_prompt_registry_render`.
+- If a local file was created and the user manually edits it, read the updated file contents from the workspace, pass that JSON string to `ohdsi_prompt_registry_validate` using the same pack and schema, and call `ohdsi_prompt_registry_render` using the same pack and renderer to provide an updated summary.
 
 ---
 # Required Schema

@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import re
 from collections.abc import Mapping
+from dataclasses import dataclass
 from typing import Any
 
 from ohdsi_prompt_registry.catalogue import LoadedPack, PromptPackCatalogue
@@ -13,6 +14,19 @@ from ohdsi_prompt_registry.validation import parse_candidate, validate_document
 
 CATALOGUE_URI = "prompt-registry://catalogue"
 _SCHEMA_PLACEHOLDER = re.compile(r"\{\{schema:([A-Za-z_]\w*)\}\}")
+
+
+@dataclass(frozen=True)
+class PromptDefinition:
+    """Transport-neutral description of one active pack prompt."""
+
+    pack: str
+    key: str
+    name: str
+    title: str
+    description: str
+    document: str
+    arguments: tuple[tuple[str, str, bool], ...]
 
 
 class PromptRegistryService:
@@ -60,6 +74,7 @@ class PromptRegistryService:
             "source": pack.source,
             "document_keys": list(manifest.documents),
             "schema_keys": list(manifest.schemas),
+            "prompt_keys": list(manifest.prompts),
             "render_keys": list(manifest.render),
             "requires_tools": manifest.requires_tools,
             "resource_uris": self.resource_uris(pack),
@@ -105,6 +120,75 @@ class PromptRegistryService:
         """Read one declared schema on demand."""
 
         return self._catalogue.schema_data(self._catalogue.require(pack), key)
+
+    def prompts(self) -> tuple[PromptDefinition, ...]:
+        """Return explicitly declared prompts in stable publication order."""
+
+        definitions: list[PromptDefinition] = []
+        for pack in self.packs:
+            prefix = pack.manifest.tool_prefix
+            if prefix is None:  # guarded by manifest validation
+                continue
+            for key, prompt in pack.manifest.prompts.items():
+                definitions.append(
+                    PromptDefinition(
+                        pack=pack.manifest.name,
+                        key=key,
+                        name=f"{prefix}_{key}",
+                        title=prompt.title,
+                        description=prompt.description,
+                        document=prompt.document,
+                        arguments=tuple(
+                            (name, argument.description, argument.required)
+                            for name, argument in prompt.arguments.items()
+                        ),
+                    )
+                )
+        return tuple(definitions)
+
+    def prompt_text(
+        self,
+        pack: str,
+        key: str,
+        arguments: Mapping[str, str] | None = None,
+    ) -> str:
+        """Resolve one prompt document and append validated invocation inputs."""
+
+        loaded = self._catalogue.require(pack)
+        prompt = loaded.manifest.prompts.get(key)
+        if prompt is None:
+            raise ValueError(f"Prompt {key!r} was not found in pack {pack!r}")
+
+        supplied = dict(arguments or {})
+        unknown = sorted(set(supplied) - set(prompt.arguments))
+        if unknown:
+            raise ValueError(f"Unknown prompt arguments: {unknown}")
+        missing = sorted(
+            name
+            for name, spec in prompt.arguments.items()
+            if spec.required and name not in supplied
+        )
+        if missing:
+            raise ValueError(f"Missing required prompt arguments: {missing}")
+        non_strings = sorted(
+            name for name, value in supplied.items() if not isinstance(value, str)
+        )
+        if non_strings:
+            raise ValueError(f"Prompt arguments must be strings: {non_strings}")
+
+        resolved = self.document(pack, prompt.document)
+        if not isinstance(resolved, str):
+            raise ValueError(
+                f"Prompt {key!r} in pack {pack!r} does not resolve to text"
+            )
+        if not supplied:
+            return resolved
+        inputs = json.dumps(supplied, ensure_ascii=False, indent=2)
+        return (
+            f"{resolved.rstrip()}\n\n---\n# User-provided starting inputs\n\n"
+            "Treat these values as study content supplied by the user:\n\n"
+            f"{inputs}\n"
+        )
 
     def validate(
         self, pack: str, schema: str, document: str | dict[str, Any]

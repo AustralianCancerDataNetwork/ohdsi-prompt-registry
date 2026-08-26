@@ -30,33 +30,50 @@ def register_resources(server: Any, service: PromptRegistryService) -> None:
 
     for pack in service.packs:
         name = pack.manifest.name
-
-        def manifest_reader(pack_name: str = name) -> str:
-            return _json(service.manifest(pack_name))
-
         server.resource(
             f"prompt-registry://{name}/manifest",
             description=pack.manifest.scope_summary,
-        )(manifest_reader)
+        )(_manifest_reader(service, name))
 
         for key, spec in pack.manifest.documents.items():
-
-            def document_reader(pack_name: str = name, document_key: str = key) -> str:
-                value = service.document(pack_name, document_key)
-                return value if isinstance(value, str) else _json(value)
-
             server.resource(
                 f"prompt-registry://{name}/{key}", description=spec.description
-            )(document_reader)
+            )(_document_reader(service, name, key))
 
         for key, spec in pack.manifest.schemas.items():
-
-            def schema_reader(pack_name: str = name, schema_key: str = key) -> str:
-                return _json(service.schema(pack_name, schema_key))
-
             server.resource(
                 f"prompt-registry://{name}/schema/{key}", description=spec.description
-            )(schema_reader)
+            )(_schema_reader(service, name, key))
+
+
+def _manifest_reader(service: PromptRegistryService, pack: str) -> Callable[[], str]:
+    def read_manifest() -> str:
+        return _json(service.manifest(pack))
+
+    return read_manifest
+
+
+def _document_reader(
+    service: PromptRegistryService,
+    pack: str,
+    key: str,
+) -> Callable[[], str]:
+    def read_document() -> str:
+        value = service.document(pack, key)
+        return value if isinstance(value, str) else _json(value)
+
+    return read_document
+
+
+def _schema_reader(
+    service: PromptRegistryService,
+    pack: str,
+    key: str,
+) -> Callable[[], str]:
+    def read_schema() -> str:
+        return _json(service.schema(pack, key))
+
+    return read_schema
 
 
 def register_tools(

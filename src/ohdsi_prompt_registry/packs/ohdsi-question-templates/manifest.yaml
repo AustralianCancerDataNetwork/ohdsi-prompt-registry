@@ -29,6 +29,16 @@ schemas:
     path: study-intent.schema.json
     description: JSON Schema for the StudyIntent research-question contract.
 
+prompts:
+  structure_question:
+    document: instructions
+    title: Structure an OHDSI research question
+    description: Structure an OHDSI research question interactively.
+    arguments:
+      question:
+        description: The clinical research question to structure.
+        required: false
+
 render:
   study_intent:
     schema: study_intent

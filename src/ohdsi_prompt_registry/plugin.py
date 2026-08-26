@@ -18,6 +18,7 @@ from oa_configurator import PackageConfigBase
 from ohdsi_prompt_registry.catalogue import LoadedPack, PromptPackCatalogue
 from ohdsi_prompt_registry.config import OhdsiPromptRegistryConfig
 from ohdsi_prompt_registry.paths import resolve_packs_root
+from ohdsi_prompt_registry.prompts import PromptRegistrationSkip, register_prompts
 from ohdsi_prompt_registry.service import PromptRegistryService
 from ohdsi_prompt_registry.sources import (
     BundledSource,
@@ -38,6 +39,7 @@ class OhdsiPromptRegistryState:
     resolved_root: Path | None
     root_issue: str | None = None
     available_tools: Callable[[], set[str]] | None = field(default=None, repr=False)
+    prompt_skips: tuple[PromptRegistrationSkip, ...] = ()
 
 
 class OhdsiPromptRegistryPlugin:
@@ -87,6 +89,7 @@ class OhdsiPromptRegistryPlugin:
         resolved = self._state(state)
         resolved.available_tools = lambda: set(server.list_tools())
         register_resources(server, resolved.service)
+        resolved.prompt_skips = register_prompts(server, resolved.service)
         register_tools(
             server,
             resolved.service,
@@ -227,6 +230,18 @@ class OhdsiPromptRegistryPlugin:
                 )
             )
 
+        for index, skip in enumerate(resolved.prompt_skips, 1):
+            warnings = True
+            fields.append(
+                PluginReadinessField(
+                    f"prompt_collision_{index}",
+                    f"Skipped prompt: {skip.name}",
+                    skip.losing_pack,
+                    PluginReadinessState.WARNING,
+                    f"Existing registration wins: {skip.existing_owner}.",
+                )
+            )
+
         required_tools = {
             tool
             for pack in resolved.catalogue.all()
@@ -307,6 +322,8 @@ def _pack_detail(pack: LoadedPack) -> str:
     content = [f"Documents: {', '.join(manifest.documents) or 'none'}. "]
     if manifest.schemas:
         content.append(f"Schemas: {', '.join(manifest.schemas)}. ")
+    if manifest.prompts:
+        content.append(f"Prompts: {', '.join(manifest.prompts)}. ")
     if manifest.render:
         content.append(f"Renderers: {', '.join(manifest.render)}. ")
     if manifest.requires_tools:

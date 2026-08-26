@@ -1,8 +1,11 @@
 from __future__ import annotations
 
+import asyncio
 import json
 from pathlib import Path
 
+import pytest
+import yaml
 from groundskeeping.configurator import ConfigWizardController, MutationOperation
 from groundskeeping.contracts import ReviewStep
 from groundworkers.application.setup.plugin_configuration import (
@@ -49,6 +52,48 @@ def _build(config: OhdsiPromptRegistryConfig) -> OhdsiPromptRegistryState:
     return state
 
 
+def _write_prompt_pack(
+    root: Path,
+    name: str,
+    *,
+    prefix: str,
+    prompt_key: str = "workflow",
+    content: str | None = None,
+) -> None:
+    pack = root / name
+    pack.mkdir(parents=True)
+    (pack / "instructions.md").write_text(
+        content or f"Instructions from {name}.", encoding="utf-8"
+    )
+    manifest = {
+        "name": name,
+        "title": name.title(),
+        "version": "1.0",
+        "shareability": "public",
+        "scope_summary": f"Fixture for {name}",
+        "documents": {
+            "instructions": {
+                "path": "instructions.md",
+                "mime_type": "text/markdown",
+                "description": "Fixture instructions",
+            }
+        },
+        "schemas": {},
+        "prompts": {
+            prompt_key: {
+                "document": "instructions",
+                "title": f"Run {name}",
+                "description": f"Run the {name} workflow.",
+                "arguments": {},
+            }
+        },
+        "tool_prefix": prefix,
+    }
+    (pack / "manifest.yaml").write_text(
+        yaml.safe_dump(manifest, sort_keys=False), encoding="utf-8"
+    )
+
+
 def test_real_server_registration_is_exact_and_described() -> None:
     state = _build(OhdsiPromptRegistryConfig())
     server = GroundworkersMCPServer("test")
@@ -76,6 +121,16 @@ def test_real_server_registration_is_exact_and_described() -> None:
         "ohdsi_prompt_registry_status",
         "ohdsi_prompt_registry_validate",
     }
+    assert "rqt_structure_question" in server.list_prompts()
+    prompt_description = server.describe_prompts()["rqt_structure_question"]
+    assert prompt_description["title"] == "Structure an OHDSI research question"
+    assert prompt_description["arguments"] == [
+        {
+            "name": "question",
+            "description": "The clinical research question to structure.",
+            "required": False,
+        }
+    ]
 
     instructions_reader = server._resources[
         "prompt-registry://ohdsi-question-templates/instructions"
@@ -94,6 +149,125 @@ def test_real_server_registration_is_exact_and_described() -> None:
         EXPECTED_URIS - {"prompt-registry://catalogue"}
     )
     assert len(links.structuredContent["links"]) == 4
+    assert catalogue["packs"][0]["prompt_keys"] == ["structure_question"]
+
+    prompt = server.call_prompt(
+        "rqt_structure_question",
+        question="Does semaglutide reduce cardiovascular risk?",
+    )
+    assert len(prompt) == 1
+    prompt_text = prompt[0]["content"]["text"]
+    assert "{{schema:" not in prompt_text
+    assert '"$schema": "https://json-schema.org/draft/2020-12/schema"' in prompt_text
+    assert "# User-provided starting inputs" in prompt_text
+    assert "Does semaglutide reduce cardiovascular risk?" in prompt_text
+    prompt_without_input = server.call_prompt("rqt_structure_question")
+    assert "# User-provided starting inputs" not in (
+        prompt_without_input[0]["content"]["text"]
+    )
+
+
+def test_prompt_collisions_are_local_first_wins_and_reported(tmp_path: Path) -> None:
+    _write_prompt_pack(tmp_path, "alpha-pack", prefix="shared")
+    _write_prompt_pack(tmp_path, "beta-pack", prefix="shared")
+    state = _build(
+        OhdsiPromptRegistryConfig(
+            packs_root=str(tmp_path),
+            include_bundled=False,
+            include_installed=False,
+        )
+    )
+    server = GroundworkersMCPServer("test")
+    plugin.register(server, state)
+
+    assert server.list_prompts() == ["shared_workflow"]
+    text = server.call_prompt("shared_workflow")[0]["content"]["text"]
+    assert "alpha-pack" in text
+    report = plugin.verify_readiness(state).as_dict()
+    collision = next(
+        field
+        for field in report["fields"]
+        if field["key"].startswith("prompt_collision_")
+    )
+    assert collision["state"] == "warning"
+    assert collision["value"] == "beta-pack"
+    assert "alpha-pack" in collision["detail"]
+
+
+def test_prompt_registration_does_not_overwrite_a_core_prompt(tmp_path: Path) -> None:
+    _write_prompt_pack(
+        tmp_path,
+        "colliding-pack",
+        prefix="normalize",
+        prompt_key="clinical_term",
+    )
+    state = _build(
+        OhdsiPromptRegistryConfig(
+            packs_root=str(tmp_path),
+            include_bundled=False,
+            include_installed=False,
+        )
+    )
+    server = GroundworkersMCPServer("test")
+
+    @server.prompt("normalize_clinical_term")
+    def core_prompt() -> str:
+        return "core"
+
+    plugin.register(server, state)
+
+    assert server.call_prompt("normalize_clinical_term") == "core"
+    report = plugin.verify_readiness(state).as_dict()
+    collision = next(
+        field
+        for field in report["fields"]
+        if field["key"].startswith("prompt_collision_")
+    )
+    assert collision["value"] == "colliding-pack"
+    assert "existing server prompt" in collision["detail"]
+
+
+def test_prompt_is_published_over_the_mcp_protocol(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from mcp.server.fastmcp import FastMCP
+    from mcp.shared.memory import create_connected_server_and_client_session
+
+    state = _build(OhdsiPromptRegistryConfig())
+    server = GroundworkersMCPServer("test")
+    plugin.register(server, state)
+    captured: dict[str, FastMCP] = {}
+
+    def capture_run(app: FastMCP, transport: str) -> None:
+        del transport
+        captured["app"] = app
+
+    monkeypatch.setattr(FastMCP, "run", capture_run)
+    server.run(transport="stdio")
+
+    async def exercise_protocol() -> None:
+        async with create_connected_server_and_client_session(
+            captured["app"]
+        ) as session:
+            listed = await session.list_prompts()
+            published = next(
+                prompt
+                for prompt in listed.prompts
+                if prompt.name == "rqt_structure_question"
+            )
+            assert published.title == "Structure an OHDSI research question"
+            assert published.arguments is not None
+            assert [argument.name for argument in published.arguments] == ["question"]
+            result = await session.get_prompt(
+                "rqt_structure_question",
+                arguments={"question": "Does treatment work?"},
+            )
+            assert len(result.messages) == 1
+            assert result.messages[0].role == "user"
+            assert result.messages[0].content.type == "text"
+            assert "Does treatment work?" in result.messages[0].content.text
+
+    asyncio.run(exercise_protocol())
 
 
 def test_tool_readiness_is_independent_of_plugin_registration_order() -> None:

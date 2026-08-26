@@ -3,9 +3,9 @@
 from __future__ import annotations
 
 import re
-from typing import Literal
+from typing import Literal, Self
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 _KEBAB_SLUG = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 
@@ -36,6 +36,41 @@ class SchemaSpec(StrictModel):
 
     path: str
     description: str
+
+
+class PromptArgumentSpec(StrictModel):
+    """One string input advertised by an explicitly declared MCP prompt."""
+
+    description: str
+    required: bool = False
+
+    @field_validator("description")
+    @classmethod
+    def validate_description(cls, value: str) -> str:
+        if not value.strip():
+            raise ValueError("must not be blank")
+        return value
+
+
+class PromptSpec(StrictModel):
+    """One user-invocable workflow backed by a declared text document."""
+
+    document: str
+    title: str
+    description: str
+    arguments: dict[str, PromptArgumentSpec] = Field(default_factory=dict)
+
+    @field_validator("document", "title", "description")
+    @classmethod
+    def validate_non_blank(cls, value: str) -> str:
+        if not value.strip():
+            raise ValueError("must not be blank")
+        return value
+
+    @field_validator("arguments", mode="before")
+    @classmethod
+    def validate_argument_keys(cls, value: object) -> object:
+        return _validate_identifier_keys(value)
 
 
 class OverviewColumn(StrictModel):
@@ -119,6 +154,7 @@ class PackManifest(StrictModel):
     see_also: list[str] = Field(default_factory=list)
     documents: dict[str, DocumentSpec]
     schemas: dict[str, SchemaSpec]
+    prompts: dict[str, PromptSpec] = Field(default_factory=dict)
     render: dict[str, RenderSpec] = Field(default_factory=dict)
     requires_tools: list[str] = Field(default_factory=list)
     tool_prefix: str | None = None
@@ -132,19 +168,12 @@ class PackManifest(StrictModel):
             raise ValueError("must be a lowercase kebab-case slug")
         return value
 
-    @field_validator("documents", "schemas", "render", mode="before")
+    @field_validator("documents", "schemas", "prompts", "render", mode="before")
     @classmethod
     def validate_mapping_keys(cls, value: object) -> object:
         """Require keys that remain safe in resource and optional tool names."""
 
-        if not isinstance(value, dict):
-            return value
-        invalid = sorted(
-            key for key in value if isinstance(key, str) and not key.isidentifier()
-        )
-        if invalid:
-            raise ValueError(f"keys must be valid Python identifiers: {invalid}")
-        return value
+        return _validate_identifier_keys(value)
 
     @field_validator("tool_prefix")
     @classmethod
@@ -154,3 +183,35 @@ class PackManifest(StrictModel):
         if value is not None and not value.isidentifier():
             raise ValueError("must be a valid Python identifier")
         return value
+
+    @model_validator(mode="after")
+    def validate_prompt_declarations(self) -> Self:
+        """Keep every published prompt resolvable and text-backed at load time."""
+
+        if not self.prompts:
+            return self
+        if self.tool_prefix is None:
+            raise ValueError("tool_prefix is required when prompts are declared")
+        for key, prompt in self.prompts.items():
+            document = self.documents.get(prompt.document)
+            if document is None:
+                raise ValueError(
+                    f"prompt {key!r} references undeclared document {prompt.document!r}"
+                )
+            if document.mime_type not in {"text/markdown", "text/plain"}:
+                raise ValueError(
+                    f"prompt {key!r} document {prompt.document!r} must use a supported "
+                    "text MIME type"
+                )
+        return self
+
+
+def _validate_identifier_keys(value: object) -> object:
+    if not isinstance(value, dict):
+        return value
+    invalid = sorted(
+        key for key in value if isinstance(key, str) and not key.isidentifier()
+    )
+    if invalid:
+        raise ValueError(f"keys must be valid Python identifiers: {invalid}")
+    return value
