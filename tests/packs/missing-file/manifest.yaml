@@ -1,0 +1,11 @@
+name: missing-file
+title: Missing file
+version: "1.0"
+shareability: shareable
+scope_summary: Invalid fixture.
+documents:
+  missing:
+    path: missing.md
+    mime_type: text/markdown
+    description: This file does not exist.
+schemas: {}

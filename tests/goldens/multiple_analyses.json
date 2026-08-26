@@ -1,0 +1,24 @@
+{
+  "analyses": [
+    {
+      "analytics_type": "characterization",
+      "template_name": "outcome_incidence",
+      "parameters": {
+        "target_cohort": "new users of ibuprofen",
+        "outcome_cohort": "gastrointestinal bleeding",
+        "time_at_risk": "on treatment"
+      }
+    },
+    {
+      "analytics_type": "effect_estimation",
+      "template_name": "cohort_method",
+      "parameters": {
+        "nesting_cohort": "people with osteoarthritis",
+        "target_cohort": "new users of ibuprofen",
+        "comparator_cohort": "new users of naproxen",
+        "outcome_cohort": "gastrointestinal bleeding",
+        "time_at_risk": "on treatment"
+      }
+    }
+  ]
+}

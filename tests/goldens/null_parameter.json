@@ -1,0 +1,11 @@
+{
+  "analyses": [
+    {
+      "analytics_type": "characterization",
+      "template_name": "patient_characterization",
+      "parameters": {
+        "target_cohort": null
+      }
+    }
+  ]
+}

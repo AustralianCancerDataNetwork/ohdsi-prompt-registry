@@ -1,0 +1,12 @@
+{
+  "analyses": [
+    {
+      "analytics_type": "characterization",
+      "template_name": "treatment_patterns",
+      "parameters": {
+        "target_cohort": "people with osteoarthritis",
+        "treatment_cohorts": ["ibuprofen", "naproxen"]
+      }
+    }
+  ]
+}

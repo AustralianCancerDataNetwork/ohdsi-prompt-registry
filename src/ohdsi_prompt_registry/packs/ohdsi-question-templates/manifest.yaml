@@ -1,0 +1,67 @@
+name: ohdsi-question-templates
+title: OHDSI research question templates
+version: "1.0"
+shareability: public
+scope_summary: >
+  Structures a clinical question into one or more OHDSI standardized analytics
+  templates and emits a validated StudyIntent document.
+
+applicability:
+  always: false
+  tags: [research-question, study-design, ohdsi]
+
+see_also: []
+
+documents:
+  instructions:
+    path: instructions.md
+    mime_type: text/markdown
+    description: >
+      Canonical guidance for collaboratively structuring OHDSI research
+      questions into standardized analytics templates.
+  catalogue:
+    path: catalogue.yaml
+    mime_type: application/json
+    description: OHDSI standardized analytics templates and their required parameters.
+
+schemas:
+  study_intent:
+    path: study-intent.schema.json
+    description: JSON Schema for the StudyIntent research-question contract.
+
+render:
+  study_intent:
+    schema: study_intent
+    markdown:
+      title: Study Intent
+      items: analyses
+      empty_text: No analyses provided.
+      summary: "Total analyses: **{count}**"
+      overview:
+        heading: Analysis Overview
+        index_column: "#"
+        columns:
+          - {field: analytics_type, label: Analytics Type, style: code}
+          - {field: template_name, label: Template, style: code}
+      detail:
+        heading: "Analysis {index}: {template_name}"
+        lead: "Analytics type: {analytics_type}"
+        values_at: parameters
+        table:
+          columns: [Parameter, Value]
+          fields_from:
+            document: catalogue
+            path: templates.{template_name}.required_parameters
+          label_style: code
+          empty_row: ["_No mapped parameters for this template_", "_Not specified_"]
+      value_styles:
+        null_text: "_Not specified_"
+        empty_list_text: "_None_"
+        list_separator: ", "
+        item_style: code
+
+requires_tools:
+  - comparator_recommender_find_target
+  - comparator_recommender_recommend
+
+tool_prefix: rqt

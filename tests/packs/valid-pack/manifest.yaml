@@ -1,0 +1,14 @@
+name: valid-pack
+title: Valid pack
+version: "1.0"
+shareability: public
+scope_summary: A small valid fixture.
+applicability:
+  always: true
+  tags: [test]
+documents:
+  instructions:
+    path: instructions.md
+    mime_type: text/markdown
+    description: Fixture instructions.
+schemas: {}

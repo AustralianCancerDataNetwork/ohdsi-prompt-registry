@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "Analysis": {
+      "properties": {
+        "analytics_type": {"$ref": "#/$defs/AnalyticsType"},
+        "template_name": {"$ref": "#/$defs/TemplateName"},
+        "parameters": {"$ref": "#/$defs/Parameters"}
+      },
+      "required": ["analytics_type", "template_name", "parameters"],
+      "title": "Analysis",
+      "type": "object"
+    },
+    "AnalyticsType": {
+      "enum": ["characterization", "effect_estimation", "patient_level_prediction"],
+      "title": "AnalyticsType",
+      "type": "string"
+    },
+    "Parameters": {
+      "properties": {
+        "target_cohort": {
+          "anyOf": [{"type": "string"}, {"type": "null"}],
+          "default": null,
+          "description": "Short description of the target cohort.",
+          "title": "Target Cohort"
+        },
+        "treatment_cohorts": {
+          "anyOf": [{"items": {"type": "string"}, "type": "array"}, {"type": "null"}],
+          "default": null,
+          "description": "Treatment cohorts, at the required granularity.",
+          "title": "Treatment Cohorts"
+        },
+        "outcome_cohort": {
+          "anyOf": [{"type": "string"}, {"type": "null"}],
+          "default": null,
+          "description": "Short description of the outcome cohort.",
+          "title": "Outcome Cohort"
+        },
+        "time_at_risk": {
+          "anyOf": [{"type": "string"}, {"type": "null"}],
+          "default": null,
+          "description": "Description of the time at risk.",
+          "title": "Time At Risk"
+        },
+        "comparator_cohort": {
+          "anyOf": [{"type": "string"}, {"type": "null"}],
+          "default": null,
+          "description": "Short description of the comparator cohort.",
+          "title": "Comparator Cohort"
+        },
+        "nesting_cohort": {
+          "anyOf": [{"type": "string"}, {"type": "null"}],
+          "default": null,
+          "description": "Short description of the nesting cohort.",
+          "title": "Nesting Cohort"
+        }
+      },
+      "title": "Parameters",
+      "type": "object"
+    },
+    "TemplateName": {
+      "enum": [
+        "patient_characterization",
+        "treatment_patterns",
+        "outcome_incidence",
+        "self_controlled_case_series",
+        "cohort_method",
+        "patient_level_prediction"
+      ],
+      "title": "TemplateName",
+      "type": "string"
+    }
+  },
+  "properties": {
+    "analyses": {
+      "items": {"$ref": "#/$defs/Analysis"},
+      "title": "Analyses",
+      "type": "array"
+    }
+  },
+  "required": ["analyses"],
+  "title": "StudyIntent",
+  "type": "object"
+}
