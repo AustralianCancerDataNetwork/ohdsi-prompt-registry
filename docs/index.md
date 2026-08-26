@@ -69,27 +69,9 @@ Call `ohdsi_prompt_registry_validate` with:
 
 The instructions in each pack state which schemas and domain tools apply. The registry supplies the current schema at read time, so the instructions and contract do not need to be kept in separate prompt copies.
 
-## Documentation
+## Where to go next
 
-Full documentation: <https://AustralianCancerDataNetwork.github.io/ohdsi-prompt-registry>
-
-- **[Pack sources](https://AustralianCancerDataNetwork.github.io/ohdsi-prompt-registry/sources/)** — bundled, installed, and filesystem packs, and which one wins when two packs share a name.
-- **[Pack format](https://AustralianCancerDataNetwork.github.io/ohdsi-prompt-registry/pack-format/)** — the manifest contract every source uses, and how to extend a pack safely.
-- **[Development](https://AustralianCancerDataNetwork.github.io/ohdsi-prompt-registry/development/)** — the local loop, versioning, and the release process.
-
-## Development
-
-```bash
-uv sync --all-extras --dev
-uv run ruff check .
-uv run ty check src/
-uv run pytest -q
-```
-
-Enable the `uv.lock` sync hook once per clone:
-
-```bash
-git config core.hooksPath .githooks
-```
-
-Contribution and labelling rules are in [.github/CONTRIBUTING.md](.github/CONTRIBUTING.md).
+- [Pack sources](sources.md): how bundled, installed, and filesystem packs are discovered, and which one wins when two packs share a name.
+- [Pack format](pack-format.md): the manifest contract every source uses, and how to extend a pack without breaking its consumers.
+- [Development](development.md): the local loop, and how versions and releases work.
+- [API reference](reference.md): the Python surface behind the MCP tools.

@@ -1,6 +1,6 @@
 [project]
 name = "ohdsi-prompt-registry"
-version = "0.0.1"
+dynamic = ["version"]
 description = "Groundworkers registry for agent-facing OHDSI prompt packs."
 readme = "README.md"
 requires-python = ">=3.12"
@@ -13,32 +13,42 @@ dependencies = [
   "PyYAML>=6",
 ]
 
+[project.optional-dependencies]
+dev = [
+  "groundskeeping>=0.6.1,<1",
+  "pytest>=9,<10",
+  "ruff>=0.4",
+  "ty>=0.0.59",
+  "mkdocs<2.0",
+  "mkdocs-material",
+  "mkdocstrings[python]",
+  "pygments>=2.20.0",
+]
+
 [project.entry-points."omop.config"]
 ohdsi_prompt_registry = "ohdsi_prompt_registry.config:OhdsiPromptRegistryConfig"
 
 [project.entry-points."groundworkers.plugins"]
 ohdsi_prompt_registry = "ohdsi_prompt_registry.plugin:plugin"
 
-[dependency-groups]
-dev = [
-  "groundskeeping>=0.6.1,<1",
-  "pytest>=9,<10",
-  "ruff>=0.4",
-  "ty>=0.0.59",
-]
-
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
+
+[tool.hatch.version]
+source = "vcs"
+raw-options = { tag_regex = '^v?(?P<version>[0-9]+\.[0-9]+\.[0-9]+)$' }
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/ohdsi_prompt_registry"]
 
 [tool.uv]
+cache-keys = [{ file = "pyproject.toml" }, { git = { commit = true, tags = true } }]
 constraint-dependencies = ["setuptools>=83.0.0"]
 
 [tool.uv.sources]
-groundworkers = { path = "../../groundworkers", editable = true }
+# required until plugin branch gets merged
+groundworkers = { git = "https://github.com/AustralianCancerDataNetwork/groundworkers.git", branch = "plugins" }
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

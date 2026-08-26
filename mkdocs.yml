@@ -1,0 +1,49 @@
+site_name: OHDSI Prompt Registry
+site_description: Groundworkers registry for agent-facing OHDSI prompt packs
+site_url: https://AustralianCancerDataNetwork.github.io/ohdsi-prompt-registry
+repo_url: https://github.com/AustralianCancerDataNetwork/ohdsi-prompt-registry
+repo_name: ohdsi-prompt-registry
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.path
+    - navigation.top
+    - content.code.copy
+    - content.code.annotate
+
+markdown_extensions:
+  - admonition
+  - footnotes
+  - tables
+  - attr_list
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.details
+  - pymdownx.superfences
+  - toc:
+      permalink: true
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths:
+            - src
+          options:
+            show_source: false
+            docstring_style: google
+            show_root_heading: true
+            merge_init_into_class: true
+            separate_signature: true
+            show_signature_annotations: true
+
+nav:
+  - Home: index.md
+  - Pack sources: sources.md
+  - Pack format: pack-format.md
+  - Development: development.md
+  - API reference: reference.md
