@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from collections.abc import Callable
 from dataclasses import dataclass, field
-from pathlib import Path
 from typing import Any, ClassVar
 
 from groundworkers.plugins import (
@@ -17,7 +16,7 @@ from oa_configurator import PackageConfigBase
 
 from ohdsi_prompt_registry.catalogue import LoadedPack, PromptPackCatalogue
 from ohdsi_prompt_registry.config import OhdsiPromptRegistryConfig
-from ohdsi_prompt_registry.paths import resolve_packs_root
+from ohdsi_prompt_registry.paths import ResolvedRoot, resolve_packs_roots
 from ohdsi_prompt_registry.prompts import PromptRegistrationSkip, register_prompts
 from ohdsi_prompt_registry.service import PromptRegistryService
 from ohdsi_prompt_registry.sources import (
@@ -35,11 +34,35 @@ class OhdsiPromptRegistryState:
     config: OhdsiPromptRegistryConfig
     catalogue: PromptPackCatalogue
     service: PromptRegistryService
-    configured_root: str | None
-    resolved_root: Path | None
-    root_issue: str | None = None
+    roots: tuple[ResolvedRoot, ...] = ()
     available_tools: Callable[[], set[str]] | None = field(default=None, repr=False)
     prompt_skips: tuple[PromptRegistrationSkip, ...] = ()
+
+
+def _root_state(
+    root: ResolvedRoot, counts: dict[str, int]
+) -> tuple[PluginReadinessState, str | None]:
+    """How one configured root is doing, and why if it is not doing well.
+
+    Each of the three failures reads differently to an operator: a path that
+    could not be anchored is a configuration mistake, a path that does not
+    exist is usually a typo or a checkout that moved, and a path with no packs
+    in it is pointing one directory too high or too low.
+    """
+
+    if root.issue is not None:
+        return PluginReadinessState.WARNING, root.issue
+    if root.path is None or not root.path.exists():
+        return (
+            PluginReadinessState.WARNING,
+            "The configured prompt-pack root does not exist.",
+        )
+    if not counts.get(root.label, 0):
+        return (
+            PluginReadinessState.WARNING,
+            "The configured prompt-pack root contains no active packs.",
+        )
+    return PluginReadinessState.READY, None
 
 
 class OhdsiPromptRegistryPlugin:
@@ -59,28 +82,27 @@ class OhdsiPromptRegistryPlugin:
         if not isinstance(config, OhdsiPromptRegistryConfig):
             return None
 
-        root: Path | None = None
-        root_issue: str | None = None
-        try:
-            root = resolve_packs_root(config.packs_root)
-        except ValueError as exc:
-            root_issue = str(exc)
+        # Each root is resolved on its own, so one that cannot be anchored
+        # costs its own packs and not everybody else's.
+        roots = resolve_packs_roots(config.packs_root)
 
         sources = []
         if config.include_bundled:
             sources.append(BundledSource())
         if config.include_installed:
             sources.append(InstalledSource())
-        if root is not None:
-            sources.append(FilesystemSource(root))
+        # In declared order, which is ascending precedence: the last root wins,
+        # so an operator adds a working copy at the end to override what is
+        # already installed.
+        for root in roots:
+            if root.path is not None:
+                sources.append(FilesystemSource(root.path, root.label))
         catalogue = PromptPackCatalogue(sources, enabled_packs=config.enabled_packs)
         return OhdsiPromptRegistryState(
             config=config,
             catalogue=catalogue,
             service=PromptRegistryService(catalogue),
-            configured_root=config.packs_root,
-            resolved_root=root,
-            root_issue=root_issue,
+            roots=tuple(roots),
         )
 
     def register(self, server: Any, state: object) -> None:
@@ -157,7 +179,7 @@ class OhdsiPromptRegistryPlugin:
                 )
             )
 
-        if resolved.configured_root is None:
+        if not resolved.roots:
             fields.append(
                 PluginReadinessField(
                     "packs_root",
@@ -166,47 +188,23 @@ class OhdsiPromptRegistryPlugin:
                     PluginReadinessState.READY,
                 )
             )
-        elif resolved.root_issue is not None:
-            warnings = True
-            fields.append(
-                PluginReadinessField(
-                    "packs_root",
-                    "Filesystem root",
-                    resolved.configured_root,
-                    PluginReadinessState.WARNING,
-                    resolved.root_issue,
-                )
-            )
-        elif resolved.resolved_root is None or not resolved.resolved_root.exists():
-            warnings = True
-            fields.append(
-                PluginReadinessField(
-                    "packs_root",
-                    "Filesystem root",
-                    resolved.configured_root,
-                    PluginReadinessState.WARNING,
-                    "The configured prompt-pack root does not exist.",
-                )
-            )
         else:
-            filesystem_count = counts.get("filesystem", 0)
-            root_state = (
-                PluginReadinessState.READY
-                if filesystem_count
-                else PluginReadinessState.WARNING
-            )
-            warnings |= not filesystem_count
-            fields.append(
-                PluginReadinessField(
-                    "packs_root",
-                    "Filesystem root",
-                    resolved.configured_root,
-                    root_state,
-                    None
-                    if filesystem_count
-                    else "The configured prompt-pack root contains no active packs.",
+            # One row per root. A single root keeps the key it has always had,
+            # so an operator's existing expectations and any tooling reading
+            # `packs_root` are unaffected by the field becoming a list.
+            single = len(resolved.roots) == 1
+            for index, root in enumerate(resolved.roots, 1):
+                key = "packs_root" if single else f"packs_root_{index}"
+                label = (
+                    "Filesystem root"
+                    if single
+                    else f"Filesystem root {index} of {len(resolved.roots)}"
                 )
-            )
+                state, detail = _root_state(root, counts)
+                warnings |= state is PluginReadinessState.WARNING
+                fields.append(
+                    PluginReadinessField(key, label, root.configured, state, detail)
+                )
 
         for index, rejection in enumerate(resolved.catalogue.rejections, 1):
             warnings = True
