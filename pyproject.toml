@@ -5,7 +5,7 @@ description = "Groundworkers registry for agent-facing OHDSI prompt packs."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-  "groundworkers>=0.4,<1",
+  "groundworkers>=0.5,<1",
   "oa-configurator>=1.2.1,<2",
   "jsonschema>=4,<5",
   "mcp>=1,<2",
@@ -45,10 +45,6 @@ packages = ["src/ohdsi_prompt_registry"]
 [tool.uv]
 cache-keys = [{ file = "pyproject.toml" }, { git = { commit = true, tags = true } }]
 constraint-dependencies = ["setuptools>=83.0.0"]
-
-[tool.uv.sources]
-# required until plugin branch gets merged
-groundworkers = { git = "https://github.com/AustralianCancerDataNetwork/groundworkers.git", branch = "plugins" }
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
