@@ -1,0 +1,4431 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Groundworkers registry for agent-facing OHDSI prompt packs">
+      
+      
+      
+        <link rel="canonical" href="https://AustralianCancerDataNetwork.github.io/ohdsi-prompt-registry/reference/">
+      
+      
+        <link rel="prev" href="../development/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>API reference - OHDSI Prompt Registry</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#api-reference" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="OHDSI Prompt Registry" class="md-header__button md-logo" aria-label="OHDSI Prompt Registry" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OHDSI Prompt Registry
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              API reference
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/AustralianCancerDataNetwork/ohdsi-prompt-registry" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ohdsi-prompt-registry
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="OHDSI Prompt Registry" class="md-nav__button md-logo" aria-label="OHDSI Prompt Registry" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    OHDSI Prompt Registry
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/AustralianCancerDataNetwork/ohdsi-prompt-registry" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ohdsi-prompt-registry
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pack sources
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pack-format/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pack format
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API reference
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#catalogue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Catalogue
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.catalogue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        catalogue
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="catalogue">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.catalogue.LoadedPack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LoadedPack
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.catalogue.PackIntegrityError" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PackIntegrityError
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.catalogue.PackRejection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PackRejection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.catalogue.PackShadow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PackShadow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.catalogue.PromptPackCatalogue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PromptPackCatalogue
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PromptPackCatalogue">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.catalogue.PromptPackCatalogue.all" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        all
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.catalogue.PromptPackCatalogue.document_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.catalogue.PromptPackCatalogue.get" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.catalogue.PromptPackCatalogue.manifest_json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        manifest_json
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.catalogue.PromptPackCatalogue.require" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        require
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.catalogue.PromptPackCatalogue.schema_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        schema_data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.catalogue.PromptPackCatalogue.source_counts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        source_counts
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manifest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manifest
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        manifest
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="manifest">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.Applicability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Applicability
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.DetailSpec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DetailSpec
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.DetailTableSpec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DetailTableSpec
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.DocumentSpec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DocumentSpec
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.FieldsFromSpec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FieldsFromSpec
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.MarkdownRenderSpec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MarkdownRenderSpec
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.OverviewColumn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OverviewColumn
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.OverviewSpec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OverviewSpec
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.PackManifest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PackManifest
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PackManifest">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.PackManifest.validate_mapping_keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        validate_mapping_keys
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.PackManifest.validate_name" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        validate_name
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.PackManifest.validate_prompt_declarations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        validate_prompt_declarations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.PackManifest.validate_tool_prefix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        validate_tool_prefix
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.PromptArgumentSpec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PromptArgumentSpec
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.PromptSpec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PromptSpec
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.RenderSpec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RenderSpec
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.SchemaSpec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SchemaSpec
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.StrictModel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        StrictModel
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.ValueStyleSpec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ValueStyleSpec
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sources
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        sources
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="sources">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.sources.BundledSource" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BundledSource
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.sources.FilesystemSource" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FilesystemSource
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.sources.InstalledSource" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        InstalledSource
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.sources.PackSource" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PackSource
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Service
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        service
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="service">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.service.PromptDefinition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PromptDefinition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.service.PromptRegistryService" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PromptRegistryService
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PromptRegistryService">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.service.PromptRegistryService.packs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        packs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.service.PromptRegistryService.registry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        registry
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.service.PromptRegistryService.catalogue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        catalogue
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.service.PromptRegistryService.document" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.service.PromptRegistryService.link_payload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        link_payload
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.service.PromptRegistryService.manifest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        manifest
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.service.PromptRegistryService.prompt_text" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        prompt_text
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.service.PromptRegistryService.prompts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        prompts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.service.PromptRegistryService.render" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        render
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.service.PromptRegistryService.resource_uris" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        resource_uris
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.service.PromptRegistryService.schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        schema
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.service.PromptRegistryService.validate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        validate
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rendering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rendering
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.render" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        render
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="render">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.render.render_markdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        render_markdown
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.render.render_value" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        render_value
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.render.validate_render_spec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        validate_render_spec
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        validation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="validation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.validation.parse_candidate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        parse_candidate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.validation.validate_document" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        validate_document
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.validation.validate_schema_document" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        validate_schema_document
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.config" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        config
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="config">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.config.OhdsiPromptRegistryConfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OhdsiPromptRegistryConfig
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#catalogue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Catalogue
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.catalogue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        catalogue
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="catalogue">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.catalogue.LoadedPack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LoadedPack
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.catalogue.PackIntegrityError" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PackIntegrityError
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.catalogue.PackRejection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PackRejection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.catalogue.PackShadow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PackShadow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.catalogue.PromptPackCatalogue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PromptPackCatalogue
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PromptPackCatalogue">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.catalogue.PromptPackCatalogue.all" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        all
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.catalogue.PromptPackCatalogue.document_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document_data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.catalogue.PromptPackCatalogue.get" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.catalogue.PromptPackCatalogue.manifest_json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        manifest_json
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.catalogue.PromptPackCatalogue.require" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        require
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.catalogue.PromptPackCatalogue.schema_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        schema_data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.catalogue.PromptPackCatalogue.source_counts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        source_counts
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manifest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manifest
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        manifest
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="manifest">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.Applicability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Applicability
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.DetailSpec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DetailSpec
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.DetailTableSpec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DetailTableSpec
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.DocumentSpec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DocumentSpec
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.FieldsFromSpec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FieldsFromSpec
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.MarkdownRenderSpec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MarkdownRenderSpec
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.OverviewColumn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OverviewColumn
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.OverviewSpec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OverviewSpec
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.PackManifest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PackManifest
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PackManifest">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.PackManifest.validate_mapping_keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        validate_mapping_keys
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.PackManifest.validate_name" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        validate_name
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.PackManifest.validate_prompt_declarations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        validate_prompt_declarations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.PackManifest.validate_tool_prefix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        validate_tool_prefix
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.PromptArgumentSpec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PromptArgumentSpec
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.PromptSpec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PromptSpec
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.RenderSpec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RenderSpec
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.SchemaSpec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SchemaSpec
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.StrictModel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        StrictModel
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.manifest.ValueStyleSpec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ValueStyleSpec
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sources
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        sources
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="sources">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.sources.BundledSource" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BundledSource
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.sources.FilesystemSource" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FilesystemSource
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.sources.InstalledSource" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        InstalledSource
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.sources.PackSource" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PackSource
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Service
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        service
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="service">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.service.PromptDefinition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PromptDefinition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.service.PromptRegistryService" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PromptRegistryService
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PromptRegistryService">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.service.PromptRegistryService.packs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        packs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.service.PromptRegistryService.registry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        registry
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.service.PromptRegistryService.catalogue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        catalogue
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.service.PromptRegistryService.document" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        document
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.service.PromptRegistryService.link_payload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        link_payload
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.service.PromptRegistryService.manifest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        manifest
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.service.PromptRegistryService.prompt_text" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        prompt_text
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.service.PromptRegistryService.prompts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        prompts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.service.PromptRegistryService.render" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        render
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.service.PromptRegistryService.resource_uris" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        resource_uris
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.service.PromptRegistryService.schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        schema
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.service.PromptRegistryService.validate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        validate
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rendering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rendering
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.render" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        render
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="render">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.render.render_markdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        render_markdown
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.render.render_value" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        render_value
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.render.validate_render_spec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        validate_render_spec
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        validation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="validation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.validation.parse_candidate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        parse_candidate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.validation.validate_document" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        validate_document
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.validation.validate_schema_document" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        validate_schema_document
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.config" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        config
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="config">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.config.OhdsiPromptRegistryConfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OhdsiPromptRegistryConfig
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="api-reference">API reference<a class="headerlink" href="#api-reference" title="Permanent link">&para;</a></h1>
+<p>The MCP tool surface is a thin wrapper over these modules. Most consumers should
+use the tools described in the <a href="../">overview</a>; this reference is for
+authors embedding the registry directly in a Python service.</p>
+<h2 id="catalogue">Catalogue<a class="headerlink" href="#catalogue" title="Permanent link">&para;</a></h2>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="ohdsi_prompt_registry.catalogue" class="doc doc-heading">
+            <span class="doc doc-object-name doc-module-name">ohdsi_prompt_registry.catalogue</span>
+
+
+<a href="#ohdsi_prompt_registry.catalogue" class="headerlink" title="Permanent link">&para;</a></h2>
+
+    <div class="doc doc-contents first">
+
+        <p>Prompt-pack discovery, precedence, integrity, and diagnostics.</p>
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="ohdsi_prompt_registry.catalogue.LoadedPack" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">LoadedPack</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
+  </span>
+
+<a href="#ohdsi_prompt_registry.catalogue.LoadedPack" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">LoadedPack</span><span class="p">(</span>
+    <span class="n">manifest</span><span class="p">:</span> <span class="n">PackManifest</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="n">Traversable</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="nb">str</span>
+<span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+
+
+        <p>A validated manifest and the directory supplying its on-demand content.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="ohdsi_prompt_registry.catalogue.PackIntegrityError" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">PackIntegrityError</span>
+
+
+<a href="#ohdsi_prompt_registry.catalogue.PackIntegrityError" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="ValueError">ValueError</span></code></p>
+
+
+
+        <p>A deterministic, display-safe pack rejection reason.</p>
+
+
+
+
+
+
+
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="ohdsi_prompt_registry.catalogue.PackRejection" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">PackRejection</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
+  </span>
+
+<a href="#ohdsi_prompt_registry.catalogue.PackRejection" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">PackRejection</span><span class="p">(</span><span class="n">pack</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">reason</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+
+
+        <p>Safe, operator-facing explanation of one refused pack.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="ohdsi_prompt_registry.catalogue.PackShadow" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">PackShadow</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
+  </span>
+
+<a href="#ohdsi_prompt_registry.catalogue.PackShadow" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">PackShadow</span><span class="p">(</span><span class="n">pack</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">winner</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">loser</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+
+
+        <p>One lower-precedence pack replaced by a valid higher-precedence pack.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="ohdsi_prompt_registry.catalogue.PromptPackCatalogue" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">PromptPackCatalogue</span>
+
+
+<a href="#ohdsi_prompt_registry.catalogue.PromptPackCatalogue" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">PromptPackCatalogue</span><span class="p">(</span>
+    <span class="n">sources</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">PackSource</span><span class="p">],</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">enabled_packs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+
+
+        <p>Process-lifetime catalogue assembled from ascending-precedence sources.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="ohdsi_prompt_registry.catalogue.PromptPackCatalogue.all" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">all</span>
+
+
+<a href="#ohdsi_prompt_registry.catalogue.PromptPackCatalogue.all" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">all</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">LoadedPack</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return active packs in stable name order.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="ohdsi_prompt_registry.catalogue.PromptPackCatalogue.document_data" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">document_data</span>
+
+
+<a href="#ohdsi_prompt_registry.catalogue.PromptPackCatalogue.document_data" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">document_data</span><span class="p">(</span><span class="n">pack</span><span class="p">:</span> <span class="n">LoadedPack</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Read and parse a declared document on demand.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="ohdsi_prompt_registry.catalogue.PromptPackCatalogue.get" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">get</span>
+
+
+<a href="#ohdsi_prompt_registry.catalogue.PromptPackCatalogue.get" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LoadedPack</span> <span class="o">|</span> <span class="kc">None</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return one active pack by its override identity.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="ohdsi_prompt_registry.catalogue.PromptPackCatalogue.manifest_json" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">manifest_json</span>
+
+
+<a href="#ohdsi_prompt_registry.catalogue.PromptPackCatalogue.manifest_json" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">manifest_json</span><span class="p">(</span><span class="n">pack</span><span class="p">:</span> <span class="n">LoadedPack</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Serialize one manifest for its MCP resource.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="ohdsi_prompt_registry.catalogue.PromptPackCatalogue.require" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">require</span>
+
+
+<a href="#ohdsi_prompt_registry.catalogue.PromptPackCatalogue.require" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">require</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LoadedPack</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return an active pack or raise a safe client-facing error.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="ohdsi_prompt_registry.catalogue.PromptPackCatalogue.schema_data" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">schema_data</span>
+
+
+<a href="#ohdsi_prompt_registry.catalogue.PromptPackCatalogue.schema_data" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">schema_data</span><span class="p">(</span><span class="n">pack</span><span class="p">:</span> <span class="n">LoadedPack</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Read and parse a declared JSON Schema on demand.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="ohdsi_prompt_registry.catalogue.PromptPackCatalogue.source_counts" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">source_counts</span>
+
+
+<a href="#ohdsi_prompt_registry.catalogue.PromptPackCatalogue.source_counts" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">source_counts</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Count active packs by safe source label.</p>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div><h2 id="manifest">Manifest<a class="headerlink" href="#manifest" title="Permanent link">&para;</a></h2>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="ohdsi_prompt_registry.manifest" class="doc doc-heading">
+            <span class="doc doc-object-name doc-module-name">ohdsi_prompt_registry.manifest</span>
+
+
+<a href="#ohdsi_prompt_registry.manifest" class="headerlink" title="Permanent link">&para;</a></h2>
+
+    <div class="doc doc-contents first">
+
+        <p>Strict models for the prompt-pack manifest and declarative renderer.</p>
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="ohdsi_prompt_registry.manifest.Applicability" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">Applicability</span>
+
+
+<a href="#ohdsi_prompt_registry.manifest.Applicability" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="StrictModel (ohdsi_prompt_registry.manifest.StrictModel)" href="#ohdsi_prompt_registry.manifest.StrictModel">StrictModel</a></code></p>
+
+
+
+        <p>Free-form discovery hints for deciding when a pack is useful.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="ohdsi_prompt_registry.manifest.DetailSpec" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">DetailSpec</span>
+
+
+<a href="#ohdsi_prompt_registry.manifest.DetailSpec" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="StrictModel (ohdsi_prompt_registry.manifest.StrictModel)" href="#ohdsi_prompt_registry.manifest.StrictModel">StrictModel</a></code></p>
+
+
+
+        <p>Per-item detail section.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="ohdsi_prompt_registry.manifest.DetailTableSpec" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">DetailTableSpec</span>
+
+
+<a href="#ohdsi_prompt_registry.manifest.DetailTableSpec" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="StrictModel (ohdsi_prompt_registry.manifest.StrictModel)" href="#ohdsi_prompt_registry.manifest.StrictModel">StrictModel</a></code></p>
+
+
+
+        <p>Parameter table inside each rendered detail section.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="ohdsi_prompt_registry.manifest.DocumentSpec" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">DocumentSpec</span>
+
+
+<a href="#ohdsi_prompt_registry.manifest.DocumentSpec" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="StrictModel (ohdsi_prompt_registry.manifest.StrictModel)" href="#ohdsi_prompt_registry.manifest.StrictModel">StrictModel</a></code></p>
+
+
+
+        <p>One document published by the registry.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="ohdsi_prompt_registry.manifest.FieldsFromSpec" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">FieldsFromSpec</span>
+
+
+<a href="#ohdsi_prompt_registry.manifest.FieldsFromSpec" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="StrictModel (ohdsi_prompt_registry.manifest.StrictModel)" href="#ohdsi_prompt_registry.manifest.StrictModel">StrictModel</a></code></p>
+
+
+
+        <p>Cross-document lookup that selects detail-table field names.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="ohdsi_prompt_registry.manifest.MarkdownRenderSpec" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">MarkdownRenderSpec</span>
+
+
+<a href="#ohdsi_prompt_registry.manifest.MarkdownRenderSpec" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="StrictModel (ohdsi_prompt_registry.manifest.StrictModel)" href="#ohdsi_prompt_registry.manifest.StrictModel">StrictModel</a></code></p>
+
+
+
+        <p>Declarative subset needed for the v1 Markdown review artifact.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="ohdsi_prompt_registry.manifest.OverviewColumn" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">OverviewColumn</span>
+
+
+<a href="#ohdsi_prompt_registry.manifest.OverviewColumn" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="StrictModel (ohdsi_prompt_registry.manifest.StrictModel)" href="#ohdsi_prompt_registry.manifest.StrictModel">StrictModel</a></code></p>
+
+
+
+        <p>One column in a Markdown overview table.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="ohdsi_prompt_registry.manifest.OverviewSpec" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">OverviewSpec</span>
+
+
+<a href="#ohdsi_prompt_registry.manifest.OverviewSpec" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="StrictModel (ohdsi_prompt_registry.manifest.StrictModel)" href="#ohdsi_prompt_registry.manifest.StrictModel">StrictModel</a></code></p>
+
+
+
+        <p>Overview table rendered once for the item collection.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="ohdsi_prompt_registry.manifest.PackManifest" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">PackManifest</span>
+
+
+<a href="#ohdsi_prompt_registry.manifest.PackManifest" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="StrictModel (ohdsi_prompt_registry.manifest.StrictModel)" href="#ohdsi_prompt_registry.manifest.StrictModel">StrictModel</a></code></p>
+
+
+
+        <p>Validated contents of a prompt pack's <code>manifest.yaml</code>.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="ohdsi_prompt_registry.manifest.PackManifest.validate_mapping_keys" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">validate_mapping_keys</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-classmethod"><code>classmethod</code></small>
+  </span>
+
+<a href="#ohdsi_prompt_registry.manifest.PackManifest.validate_mapping_keys" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">validate_mapping_keys</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">object</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Require keys that remain safe in resource and optional tool names.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="ohdsi_prompt_registry.manifest.PackManifest.validate_name" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">validate_name</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-classmethod"><code>classmethod</code></small>
+  </span>
+
+<a href="#ohdsi_prompt_registry.manifest.PackManifest.validate_name" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">validate_name</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Require the stable lowercase kebab-case pack identity.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="ohdsi_prompt_registry.manifest.PackManifest.validate_prompt_declarations" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">validate_prompt_declarations</span>
+
+
+<a href="#ohdsi_prompt_registry.manifest.PackManifest.validate_prompt_declarations" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">validate_prompt_declarations</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Self</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Keep every published prompt resolvable and text-backed at load time.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="ohdsi_prompt_registry.manifest.PackManifest.validate_tool_prefix" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">validate_tool_prefix</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-classmethod"><code>classmethod</code></small>
+  </span>
+
+<a href="#ohdsi_prompt_registry.manifest.PackManifest.validate_tool_prefix" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">validate_tool_prefix</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Keep optional alias prefixes inside the shared MCP identifier space.</p>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="ohdsi_prompt_registry.manifest.PromptArgumentSpec" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">PromptArgumentSpec</span>
+
+
+<a href="#ohdsi_prompt_registry.manifest.PromptArgumentSpec" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="StrictModel (ohdsi_prompt_registry.manifest.StrictModel)" href="#ohdsi_prompt_registry.manifest.StrictModel">StrictModel</a></code></p>
+
+
+
+        <p>One string input advertised by an explicitly declared MCP prompt.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="ohdsi_prompt_registry.manifest.PromptSpec" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">PromptSpec</span>
+
+
+<a href="#ohdsi_prompt_registry.manifest.PromptSpec" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="StrictModel (ohdsi_prompt_registry.manifest.StrictModel)" href="#ohdsi_prompt_registry.manifest.StrictModel">StrictModel</a></code></p>
+
+
+
+        <p>One user-invocable workflow backed by a declared text document.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="ohdsi_prompt_registry.manifest.RenderSpec" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">RenderSpec</span>
+
+
+<a href="#ohdsi_prompt_registry.manifest.RenderSpec" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="StrictModel (ohdsi_prompt_registry.manifest.StrictModel)" href="#ohdsi_prompt_registry.manifest.StrictModel">StrictModel</a></code></p>
+
+
+
+        <p>A named renderer tied to one declared schema.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="ohdsi_prompt_registry.manifest.SchemaSpec" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">SchemaSpec</span>
+
+
+<a href="#ohdsi_prompt_registry.manifest.SchemaSpec" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="StrictModel (ohdsi_prompt_registry.manifest.StrictModel)" href="#ohdsi_prompt_registry.manifest.StrictModel">StrictModel</a></code></p>
+
+
+
+        <p>One JSON Schema published by the registry.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="ohdsi_prompt_registry.manifest.StrictModel" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">StrictModel</span>
+
+
+<a href="#ohdsi_prompt_registry.manifest.StrictModel" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="pydantic.BaseModel">BaseModel</span></code></p>
+
+
+
+        <p>Base class which turns misspelled manifest keys into load failures.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="ohdsi_prompt_registry.manifest.ValueStyleSpec" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">ValueStyleSpec</span>
+
+
+<a href="#ohdsi_prompt_registry.manifest.ValueStyleSpec" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="StrictModel (ohdsi_prompt_registry.manifest.StrictModel)" href="#ohdsi_prompt_registry.manifest.StrictModel">StrictModel</a></code></p>
+
+
+
+        <p>Deterministic formatting rules shared by rendered values.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div><h2 id="sources">Sources<a class="headerlink" href="#sources" title="Permanent link">&para;</a></h2>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="ohdsi_prompt_registry.sources" class="doc doc-heading">
+            <span class="doc doc-object-name doc-module-name">ohdsi_prompt_registry.sources</span>
+
+
+<a href="#ohdsi_prompt_registry.sources" class="headerlink" title="Permanent link">&para;</a></h2>
+
+    <div class="doc doc-contents first">
+
+        <p>Discovery sources for bundled, installed, and operator-authored packs.</p>
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="ohdsi_prompt_registry.sources.BundledSource" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">BundledSource</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
+  </span>
+
+<a href="#ohdsi_prompt_registry.sources.BundledSource" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">BundledSource</span><span class="p">(</span>
+    <span class="n">root</span><span class="p">:</span> <span class="n">Traversable</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">source_label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"bundled"</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+
+
+        <p>Packs distributed inside :mod:<code>ohdsi_prompt_registry.packs</code>.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="ohdsi_prompt_registry.sources.FilesystemSource" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">FilesystemSource</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
+  </span>
+
+<a href="#ohdsi_prompt_registry.sources.FilesystemSource" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">FilesystemSource</span><span class="p">(</span>
+    <span class="n">root</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">source_label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"filesystem"</span>
+<span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+
+
+        <p>Packs underneath one configured local directory.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="ohdsi_prompt_registry.sources.InstalledSource" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">InstalledSource</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
+  </span>
+
+<a href="#ohdsi_prompt_registry.sources.InstalledSource" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">InstalledSource</span><span class="p">(</span>
+    <span class="n">group</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"ohdsi_prompt_registry.packs"</span><span class="p">,</span>
+    <span class="n">provider</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span>
+        <span class="o">...</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">EntryPoint</span><span class="p">]</span>
+    <span class="p">]</span> <span class="o">=</span> <span class="n">entry_points</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+
+
+        <p>Packs contributed through the dedicated package entry-point group.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="ohdsi_prompt_registry.sources.PackSource" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">PackSource</span>
+
+
+<a href="#ohdsi_prompt_registry.sources.PackSource" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="typing.Protocol">Protocol</span></code></p>
+
+
+
+        <p>A source yields pack directory name, directory handle, and safe label.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div><h2 id="service">Service<a class="headerlink" href="#service" title="Permanent link">&para;</a></h2>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="ohdsi_prompt_registry.service" class="doc doc-heading">
+            <span class="doc doc-object-name doc-module-name">ohdsi_prompt_registry.service</span>
+
+
+<a href="#ohdsi_prompt_registry.service" class="headerlink" title="Permanent link">&para;</a></h2>
+
+    <div class="doc doc-contents first">
+
+        <p>Transport-neutral prompt-registry publication operations.</p>
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="ohdsi_prompt_registry.service.PromptDefinition" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">PromptDefinition</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
+  </span>
+
+<a href="#ohdsi_prompt_registry.service.PromptDefinition" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">PromptDefinition</span><span class="p">(</span>
+    <span class="n">pack</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">document</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">arguments</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">],</span> <span class="o">...</span><span class="p">],</span>
+<span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+
+
+        <p>Transport-neutral description of one active pack prompt.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="ohdsi_prompt_registry.service.PromptRegistryService" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">PromptRegistryService</span>
+
+
+<a href="#ohdsi_prompt_registry.service.PromptRegistryService" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">PromptRegistryService</span><span class="p">(</span><span class="n">catalogue</span><span class="p">:</span> <span class="n">PromptPackCatalogue</span><span class="p">)</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+
+
+        <p>Expose active pack metadata and content without MCP-specific types.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h4 id="ohdsi_prompt_registry.service.PromptRegistryService.packs" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">packs</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+<a href="#ohdsi_prompt_registry.service.PromptRegistryService.packs" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">packs</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">LoadedPack</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Active packs in stable publication order.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h4 id="ohdsi_prompt_registry.service.PromptRegistryService.registry" class="doc doc-heading">
+            <span class="doc doc-object-name doc-attribute-name">registry</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+<a href="#ohdsi_prompt_registry.service.PromptRegistryService.registry" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="n">registry</span><span class="p">:</span> <span class="n">PromptPackCatalogue</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>The validated catalogue backing this service.</p>
+
+    </div>
+
+</div>
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="ohdsi_prompt_registry.service.PromptRegistryService.catalogue" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">catalogue</span>
+
+
+<a href="#ohdsi_prompt_registry.service.PromptRegistryService.catalogue" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">catalogue</span><span class="p">(</span><span class="n">tags</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return the full or tag-filtered pack index.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="ohdsi_prompt_registry.service.PromptRegistryService.document" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">document</span>
+
+
+<a href="#ohdsi_prompt_registry.service.PromptRegistryService.document" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">document</span><span class="p">(</span><span class="n">pack</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Read a document and interpolate current schema content into text.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="ohdsi_prompt_registry.service.PromptRegistryService.link_payload" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">link_payload</span>
+
+
+<a href="#ohdsi_prompt_registry.service.PromptRegistryService.link_payload" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">link_payload</span><span class="p">(</span><span class="n">pack</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return protocol-neutral link metadata for every pack resource.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="ohdsi_prompt_registry.service.PromptRegistryService.manifest" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">manifest</span>
+
+
+<a href="#ohdsi_prompt_registry.service.PromptRegistryService.manifest" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">manifest</span><span class="p">(</span><span class="n">pack</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return one pack's parsed manifest.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="ohdsi_prompt_registry.service.PromptRegistryService.prompt_text" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">prompt_text</span>
+
+
+<a href="#ohdsi_prompt_registry.service.PromptRegistryService.prompt_text" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">prompt_text</span><span class="p">(</span>
+    <span class="n">pack</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">arguments</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Resolve one prompt document and append validated invocation inputs.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="ohdsi_prompt_registry.service.PromptRegistryService.prompts" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">prompts</span>
+
+
+<a href="#ohdsi_prompt_registry.service.PromptRegistryService.prompts" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">prompts</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">PromptDefinition</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return explicitly declared prompts in stable publication order.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="ohdsi_prompt_registry.service.PromptRegistryService.render" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">render</span>
+
+
+<a href="#ohdsi_prompt_registry.service.PromptRegistryService.render" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">render</span><span class="p">(</span>
+    <span class="n">pack</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">render</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">document</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+    <span class="nb">format</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"markdown"</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Validate, then render one document with a declared deterministic spec.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="ohdsi_prompt_registry.service.PromptRegistryService.resource_uris" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">resource_uris</span>
+
+
+<a href="#ohdsi_prompt_registry.service.PromptRegistryService.resource_uris" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">resource_uris</span><span class="p">(</span><span class="n">pack</span><span class="p">:</span> <span class="n">LoadedPack</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return every concrete URI published for one pack.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="ohdsi_prompt_registry.service.PromptRegistryService.schema" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">schema</span>
+
+
+<a href="#ohdsi_prompt_registry.service.PromptRegistryService.schema" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">schema</span><span class="p">(</span><span class="n">pack</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Read one declared schema on demand.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="ohdsi_prompt_registry.service.PromptRegistryService.validate" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">validate</span>
+
+
+<a href="#ohdsi_prompt_registry.service.PromptRegistryService.validate" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">validate</span><span class="p">(</span>
+    <span class="n">pack</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">schema</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">document</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Validate a candidate against one declared schema.</p>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div><h2 id="rendering">Rendering<a class="headerlink" href="#rendering" title="Permanent link">&para;</a></h2>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="ohdsi_prompt_registry.render" class="doc doc-heading">
+            <span class="doc doc-object-name doc-module-name">ohdsi_prompt_registry.render</span>
+
+
+<a href="#ohdsi_prompt_registry.render" class="headerlink" title="Permanent link">&para;</a></h2>
+
+    <div class="doc doc-contents first">
+
+        <p>Pure, declarative Markdown rendering and load-time spec integrity checks.</p>
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="ohdsi_prompt_registry.render.render_markdown" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">render_markdown</span>
+
+
+<a href="#ohdsi_prompt_registry.render.render_markdown" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">render_markdown</span><span class="p">(</span>
+    <span class="n">spec</span><span class="p">:</span> <span class="n">MarkdownRenderSpec</span><span class="p">,</span>
+    <span class="n">document</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+    <span class="n">documents</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Render a validated document using only the bounded declarative spec.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="ohdsi_prompt_registry.render.render_value" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">render_value</span>
+
+
+<a href="#ohdsi_prompt_registry.render.render_value" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">render_value</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">styles</span><span class="p">:</span> <span class="n">ValueStyleSpec</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Format one table value according to the declared null/list/item policy.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="ohdsi_prompt_registry.render.validate_render_spec" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">validate_render_spec</span>
+
+
+<a href="#ohdsi_prompt_registry.render.validate_render_spec" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">validate_render_spec</span><span class="p">(</span>
+    <span class="n">spec</span><span class="p">:</span> <span class="n">RenderSpec</span><span class="p">,</span>
+    <span class="n">manifest</span><span class="p">:</span> <span class="n">PackManifest</span><span class="p">,</span>
+    <span class="n">schema</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+    <span class="n">documents</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Reject a renderer whose paths, lookups, or placeholders are unsafe.</p>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div><h2 id="validation">Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h2>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="ohdsi_prompt_registry.validation" class="doc doc-heading">
+            <span class="doc doc-object-name doc-module-name">ohdsi_prompt_registry.validation</span>
+
+
+<a href="#ohdsi_prompt_registry.validation" class="headerlink" title="Permanent link">&para;</a></h2>
+
+    <div class="doc doc-contents first">
+
+        <p>Deterministic JSON Schema checks for pack contracts and candidate documents.</p>
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="ohdsi_prompt_registry.validation.parse_candidate" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">parse_candidate</span>
+
+
+<a href="#ohdsi_prompt_registry.validation.parse_candidate" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">parse_candidate</span><span class="p">(</span>
+    <span class="n">document</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Any</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Parse a JSON string while preserving a distinct correction category.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="ohdsi_prompt_registry.validation.validate_document" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">validate_document</span>
+
+
+<a href="#ohdsi_prompt_registry.validation.validate_document" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">validate_document</span><span class="p">(</span>
+    <span class="n">schema</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+    <span class="n">document</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Validate a candidate and report every actionable schema failure.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="ohdsi_prompt_registry.validation.validate_schema_document" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">validate_schema_document</span>
+
+
+<a href="#ohdsi_prompt_registry.validation.validate_schema_document" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">validate_schema_document</span><span class="p">(</span><span class="n">schema</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Reject a declared schema that is invalid under its stated dialect.</p>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div><h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="ohdsi_prompt_registry.config" class="doc doc-heading">
+            <span class="doc doc-object-name doc-module-name">ohdsi_prompt_registry.config</span>
+
+
+<a href="#ohdsi_prompt_registry.config" class="headerlink" title="Permanent link">&para;</a></h2>
+
+    <div class="doc doc-contents first">
+
+        <p>Configuration declared by the OHDSI Prompt Registry plugin.</p>
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="ohdsi_prompt_registry.config.OhdsiPromptRegistryConfig" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">OhdsiPromptRegistryConfig</span>
+
+
+<a href="#ohdsi_prompt_registry.config.OhdsiPromptRegistryConfig" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="oa_configurator.PackageConfigBase">PackageConfigBase</span></code></p>
+
+
+
+        <p>Discovery controls for bundled, installed, and local prompt packs.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.expand", "navigation.path", "navigation.top", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
