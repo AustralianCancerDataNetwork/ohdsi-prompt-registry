@@ -5,7 +5,7 @@ description = "Groundworkers registry for agent-facing OHDSI prompt packs."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-  "groundworkers>=0.5,<1",
+  "groundworkers[tui]>=0.5,<1",
   "oa-configurator>=1.2.1,<2",
   "jsonschema>=4,<5",
   "mcp>=1,<2",
@@ -15,7 +15,6 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
-  "groundskeeping>=0.6.1,<1",
   "pytest>=9,<10",
   "ruff>=0.4",
   "ty>=0.0.59",

@@ -1036,6 +1036,13 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/85/73/62193ce8ab7e87ce0791d2f97cfefad1644866a5139003ac92534c9d4415/groundworkers-0.5.0-py3-none-any.whl", hash = "sha256:4a0b388d8e6f50c40ec307d92a6682ed650f72758cc5be95d71a23291d694c90", size = 338544, upload-time = "2026-09-05T12:14:28.239Z" },
 ]
 
+[package.optional-dependencies]
+tui = [
+    { name = "groundskeeping" },
+    { name = "rich" },
+    { name = "textual" },
+]
+
 [[package]]
 name = "h11"
 version = "0.16.0"
@@ -2312,7 +2319,7 @@ wheels = [
 name = "ohdsi-prompt-registry"
 source = { editable = "." }
 dependencies = [
-    { name = "groundworkers" },
+    { name = "groundworkers", extra = ["tui"] },
     { name = "jsonschema" },
     { name = "mcp" },
     { name = "oa-configurator" },
@@ -2322,7 +2329,6 @@ dependencies = [
 
 [package.optional-dependencies]
 dev = [
-    { name = "groundskeeping" },
     { name = "mkdocs" },
     { name = "mkdocs-material" },
     { name = "mkdocstrings", extra = ["python"] },
@@ -2334,8 +2340,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "groundskeeping", marker = "extra == 'dev'", specifier = ">=0.6.1,<1" },
-    { name = "groundworkers", specifier = ">=0.5,<1" },
+    { name = "groundworkers", extras = ["tui"], specifier = ">=0.5,<1" },
     { name = "jsonschema", specifier = ">=4,<5" },
     { name = "mcp", specifier = ">=1,<2" },
     { name = "mkdocs", marker = "extra == 'dev'", specifier = "<2.0" },
