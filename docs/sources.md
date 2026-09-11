@@ -101,6 +101,26 @@ prompt-packs/
 
 After adding or removing a pack directory, restart Groundworkers so the MCP resource and prompt lists are rebuilt. Changes to files already declared by an active pack are read on demand, so they do not require repackaging.
 
+#### More than one root
+
+`packs_root` accepts a list, in ascending precedence: a pack in a later directory shadows one of the same name in an earlier directory, and shadows the bundled and installed sets too. A single directory may still be written as a bare string, and one written that way behaves exactly as it always has.
+
+```toml
+[tools.ohdsi_prompt_registry]
+packs_root = ["/srv/shared/prompt-packs", "~/work/my-packs"]
+```
+
+This is how a pack is edited without repackaging the distribution that ships it. Point the last root at a working copy of an installed pack, and the working copy wins; `ohdsi_prompt_registry_status` names both, so an override is visible rather than mysterious:
+
+```text
+Shadowed pack: cqi-indicator-design: filesystem:/home/analyst/work/my-packs
+    Overrides installed:cqi_workers.
+```
+
+Each root is resolved on its own. One that cannot be anchored, or does not exist, gets its own warning row and costs only its own packs — the rest still load.
+
+> The setup console cannot edit `packs_root`, because the host's generic configuration workflow builds no field for an optional list. Set it in the configuration file. An existing value is preserved when other fields are edited through the console.
+
 To use the filesystem source alone, which is useful for testing an override:
 
 ```toml

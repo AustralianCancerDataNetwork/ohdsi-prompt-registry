@@ -411,9 +411,16 @@ def test_generic_workflow_writes_registry_configuration(tmp_path: Path) -> None:
     controller = ConfigWizardController(workflow, service)
 
     snapshot = controller.start()
+    # `packs_root` is not among them: the host's generic workflow builds no
+    # field for an optional list, and silently omits it -- as it already does
+    # for `enabled_packs`. Editing anything else must not disturb it.
+    assert [field.key for field in snapshot.step.fields] == [
+        "include_bundled",
+        "include_installed",
+        "tool_aliases_enabled",
+    ]
     snapshot = controller.submit(
         {
-            "packs_root": "./prompt-packs",
             "include_bundled": False,
             "include_installed": True,
             "tool_aliases_enabled": False,
@@ -425,11 +432,182 @@ def test_generic_workflow_writes_registry_configuration(tmp_path: Path) -> None:
 
     saved = load_stack_config_from_path(path)
     assert saved.tools["ohdsi_prompt_registry"] == {
-        "packs_root": "./prompt-packs",
         "include_bundled": False,
         "include_installed": True,
         "tool_aliases_enabled": False,
     }
-    assert OhdsiPromptRegistryConfig.validate_candidate(saved).packs_root == (
-        "./prompt-packs"
+
+
+def test_an_existing_packs_root_survives_an_unrelated_console_edit(
+    tmp_path: Path,
+) -> None:
+    """The console cannot set the field, so it must not be able to lose it.
+
+    An optional list has no field in the generic workflow, which would be a
+    nuisance; silently dropping a configured value while an operator edited
+    something else would be a fault.
+    """
+
+    path = tmp_path / "config.toml"
+    stack = StackConfig(
+        connections={
+            "cdm_main": ConnectionConfig(dialect="sqlite", database_name=":memory:")
+        },
+        databases={
+            "cdm_db": CDMDatabaseConfig(
+                connection="cdm_main", schema_name="main", vocab_schema="main"
+            )
+        },
+        tools={
+            "ohdsi_prompt_registry": {
+                "packs_root": ["/shared/packs", "/home/analyst/packs"],
+                "include_bundled": True,
+            }
+        },
     )
+    save_stack_config(stack, path)
+    service = PackageConfigMutationService(path, OhdsiPromptRegistryConfig)
+    controller = ConfigWizardController(
+        service.workflow(MutationOperation.UPDATE), service
+    )
+
+    controller.start()
+    controller.submit(
+        {
+            "include_bundled": False,
+            "include_installed": True,
+            "tool_aliases_enabled": False,
+        }
+    )
+    assert controller.apply().applied
+
+    saved = load_stack_config_from_path(path)
+    assert saved.tools["ohdsi_prompt_registry"]["packs_root"] == [
+        "/shared/packs",
+        "/home/analyst/packs",
+    ]
+
+
+# ---- several filesystem roots -------------------------------------------
+
+
+def _copy_valid_pack(destination: Path, *, title: str | None = None) -> Path:
+    """Put a copy of the reference pack somewhere, optionally retitled.
+
+    Retitling is how a test tells two copies of the same pack apart: they must
+    share a name to collide at all, so the name cannot be the thing that
+    identifies the winner.
+    """
+
+    import shutil
+
+    source = Path(__file__).parent / "packs" / "valid-pack"
+    target = destination / "valid-pack"
+    shutil.copytree(source, target)
+    if title is not None:
+        manifest_path = target / "manifest.yaml"
+        manifest = yaml.safe_load(manifest_path.read_text(encoding="utf-8"))
+        manifest["title"] = title
+        manifest_path.write_text(yaml.safe_dump(manifest), encoding="utf-8")
+    return destination
+
+
+def test_a_single_root_written_as_a_string_still_works(tmp_path: Path) -> None:
+    """Configuration files in the wild spell this as a string, and a release
+    should not require rewriting them."""
+
+    _copy_valid_pack(tmp_path)
+
+    config = OhdsiPromptRegistryConfig(
+        packs_root=str(tmp_path), include_bundled=False, include_installed=False
+    )
+
+    assert config.packs_root == [str(tmp_path)]
+    state = _build(config)
+    assert [pack.manifest.name for pack in state.catalogue.all()] == ["valid-pack"]
+    assert state.catalogue.all()[0].source == "filesystem"
+
+
+def test_a_later_root_shadows_an_earlier_one_and_the_diagnostic_names_both(
+    tmp_path: Path,
+) -> None:
+    """Precedence is declared order, so the last root is the one an operator
+    adds to override what they already have."""
+
+    shared = _copy_valid_pack(tmp_path / "shared", title="Shared copy")
+    working = _copy_valid_pack(tmp_path / "working", title="Working copy")
+
+    state = _build(
+        OhdsiPromptRegistryConfig(
+            packs_root=[str(shared), str(working)],
+            include_bundled=False,
+            include_installed=False,
+        )
+    )
+
+    (active,) = state.catalogue.all()
+    assert active.manifest.title == "Working copy"
+    (shadow,) = state.catalogue.shadows
+    assert shadow.pack == "valid-pack"
+    assert shadow.winner == f"filesystem:{working}"
+    assert shadow.loser == f"filesystem:{shared}"
+    assert shadow.winner != shadow.loser
+
+
+def test_one_unusable_root_does_not_silence_the_others(tmp_path: Path) -> None:
+    _copy_valid_pack(tmp_path)
+
+    state = _build(
+        OhdsiPromptRegistryConfig(
+            packs_root=[str(tmp_path), "relative"],
+            include_bundled=False,
+            include_installed=False,
+        )
+    )
+
+    assert [pack.manifest.name for pack in state.catalogue.all()] == ["valid-pack"]
+    report = plugin.verify_readiness(state)
+    rows = {field.key: field for field in report.fields}
+    assert rows["packs_root_1"].state.value == "ready"
+    assert rows["packs_root_2"].state.value == "warning"
+    assert "cannot be anchored" in (rows["packs_root_2"].detail or "")
+
+
+def test_each_root_gets_its_own_readiness_row_naming_what_was_configured(
+    tmp_path: Path,
+) -> None:
+    first = _copy_valid_pack(tmp_path / "first")
+    second = tmp_path / "empty"
+    second.mkdir()
+
+    state = _build(
+        OhdsiPromptRegistryConfig(
+            packs_root=[str(first), str(second)],
+            include_bundled=False,
+            include_installed=False,
+        )
+    )
+
+    rows = {field.key: field for field in plugin.verify_readiness(state).fields}
+    assert rows["packs_root_1"].value == str(first)
+    assert rows["packs_root_2"].value == str(second)
+    assert "no active packs" in (rows["packs_root_2"].detail or "")
+
+
+def test_a_single_root_keeps_the_readiness_key_it_has_always_had(
+    tmp_path: Path,
+) -> None:
+    """An operator reading the setup console, and anything reading this report,
+    should see no change from the field becoming a list."""
+
+    _copy_valid_pack(tmp_path)
+
+    state = _build(
+        OhdsiPromptRegistryConfig(
+            packs_root=[str(tmp_path)], include_bundled=False, include_installed=False
+        )
+    )
+
+    keys = {field.key for field in plugin.verify_readiness(state).fields}
+    assert "packs_root" in keys
+    assert "packs_root_1" not in keys
