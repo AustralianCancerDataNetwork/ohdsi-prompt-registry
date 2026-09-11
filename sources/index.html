@@ -343,6 +343,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="3. Filesystem packs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#more-than-one-root" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        More than one root
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -491,6 +508,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="3. Filesystem packs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#more-than-one-root" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        More than one root
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -607,6 +641,19 @@ Optional argument: question = "Does semaglutide reduce cardiovascular risk?"
     └── request.schema.json
 </code></pre></div>
 <p>After adding or removing a pack directory, restart Groundworkers so the MCP resource and prompt lists are rebuilt. Changes to files already declared by an active pack are read on demand, so they do not require repackaging.</p>
+<h4 id="more-than-one-root">More than one root<a class="headerlink" href="#more-than-one-root" title="Permanent link">&para;</a></h4>
+<p><code>packs_root</code> accepts a list, in ascending precedence: a pack in a later directory shadows one of the same name in an earlier directory, and shadows the bundled and installed sets too. A single directory may still be written as a bare string, and one written that way behaves exactly as it always has.</p>
+<div class="highlight"><pre><span></span><code><span class="k">[tools.ohdsi_prompt_registry]</span>
+<span class="n">packs_root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">"/srv/shared/prompt-packs"</span><span class="p">,</span><span class="w"> </span><span class="s2">"~/work/my-packs"</span><span class="p">]</span>
+</code></pre></div>
+<p>This is how a pack is edited without repackaging the distribution that ships it. Point the last root at a working copy of an installed pack, and the working copy wins; <code>ohdsi_prompt_registry_status</code> names both, so an override is visible rather than mysterious:</p>
+<div class="highlight"><pre><span></span><code>Shadowed pack: cqi-indicator-design: filesystem:/home/analyst/work/my-packs
+    Overrides installed:cqi_workers.
+</code></pre></div>
+<p>Each root is resolved on its own. One that cannot be anchored, or does not exist, gets its own warning row and costs only its own packs — the rest still load.</p>
+<blockquote>
+<p>The setup console cannot edit <code>packs_root</code>, because the host's generic configuration workflow builds no field for an optional list. Set it in the configuration file. An existing value is preserved when other fields are edited through the console.</p>
+</blockquote>
 <p>To use the filesystem source alone, which is useful for testing an override:</p>
 <div class="highlight"><pre><span></span><code><span class="k">[tools.ohdsi_prompt_registry]</span>
 <span class="n">packs_root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"/srv/groundcrew/prompt-packs"</span>
