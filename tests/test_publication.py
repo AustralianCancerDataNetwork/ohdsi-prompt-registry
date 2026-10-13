@@ -18,7 +18,7 @@ from oa_configurator import (
     ConnectionConfig,
     Resolver,
     StackConfig,
-    load_stack_config_from_path,
+    load_stack_config,
     save_stack_config,
 )
 
@@ -400,9 +400,7 @@ def test_generic_workflow_writes_registry_configuration(tmp_path: Path) -> None:
             "cdm_main": ConnectionConfig(dialect="sqlite", database_name=":memory:")
         },
         databases={
-            "cdm_db": CDMDatabaseConfig(
-                connection="cdm_main", schema_name="main", vocab_schema="main"
-            )
+            "cdm_db": CDMDatabaseConfig(connection="cdm_main")
         },
     )
     save_stack_config(stack, path)
@@ -430,7 +428,7 @@ def test_generic_workflow_writes_registry_configuration(tmp_path: Path) -> None:
     assert snapshot.can_apply
     assert controller.apply().applied
 
-    saved = load_stack_config_from_path(path)
+    saved = load_stack_config(path)
     assert saved.tools["ohdsi_prompt_registry"] == {
         "include_bundled": False,
         "include_installed": True,
@@ -454,9 +452,7 @@ def test_an_existing_packs_root_survives_an_unrelated_console_edit(
             "cdm_main": ConnectionConfig(dialect="sqlite", database_name=":memory:")
         },
         databases={
-            "cdm_db": CDMDatabaseConfig(
-                connection="cdm_main", schema_name="main", vocab_schema="main"
-            )
+            "cdm_db": CDMDatabaseConfig(connection="cdm_main")
         },
         tools={
             "ohdsi_prompt_registry": {
@@ -481,7 +477,7 @@ def test_an_existing_packs_root_survives_an_unrelated_console_edit(
     )
     assert controller.apply().applied
 
-    saved = load_stack_config_from_path(path)
+    saved = load_stack_config(path)
     assert saved.tools["ohdsi_prompt_registry"]["packs_root"] == [
         "/shared/packs",
         "/home/analyst/packs",
