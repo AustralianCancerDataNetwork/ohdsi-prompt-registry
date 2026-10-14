@@ -18,7 +18,7 @@ from oa_configurator import (
     ConnectionConfig,
     Resolver,
     StackConfig,
-    load_stack_config_from_path,
+    load_stack_config,
     save_stack_config,
 )
 
@@ -95,7 +95,7 @@ def _write_prompt_pack(
 
 
 def test_real_server_registration_is_exact_and_described() -> None:
-    state = _build(OhdsiPromptRegistryConfig())
+    state = _build(OhdsiPromptRegistryConfig(include_installed=False))
     server = GroundworkersMCPServer("test")
 
     @server.tool("comparator_recommender_find_target")
@@ -271,7 +271,7 @@ def test_prompt_is_published_over_the_mcp_protocol(
 
 
 def test_tool_readiness_is_independent_of_plugin_registration_order() -> None:
-    state = _build(OhdsiPromptRegistryConfig())
+    state = _build(OhdsiPromptRegistryConfig(include_installed=False))
     server = GroundworkersMCPServer("test")
     plugin.register(server, state)
 
@@ -300,7 +300,7 @@ def test_tool_readiness_is_independent_of_plugin_registration_order() -> None:
 def test_readiness_matrix(tmp_path: Path, monkeypatch) -> None:
     monkeypatch.delenv("OA_CONFIG_PATH", raising=False)
 
-    active = _build(OhdsiPromptRegistryConfig())
+    active = _build(OhdsiPromptRegistryConfig(include_installed=False))
     active.available_tools = lambda: {
         "comparator_recommender_find_target",
         "comparator_recommender_recommend",
@@ -400,9 +400,7 @@ def test_generic_workflow_writes_registry_configuration(tmp_path: Path) -> None:
             "cdm_main": ConnectionConfig(dialect="sqlite", database_name=":memory:")
         },
         databases={
-            "cdm_db": CDMDatabaseConfig(
-                connection="cdm_main", schema_name="main", vocab_schema="main"
-            )
+            "cdm_db": CDMDatabaseConfig(connection="cdm_main")
         },
     )
     save_stack_config(stack, path)
@@ -430,7 +428,7 @@ def test_generic_workflow_writes_registry_configuration(tmp_path: Path) -> None:
     assert snapshot.can_apply
     assert controller.apply().applied
 
-    saved = load_stack_config_from_path(path)
+    saved = load_stack_config(path)
     assert saved.tools["ohdsi_prompt_registry"] == {
         "include_bundled": False,
         "include_installed": True,
@@ -454,9 +452,7 @@ def test_an_existing_packs_root_survives_an_unrelated_console_edit(
             "cdm_main": ConnectionConfig(dialect="sqlite", database_name=":memory:")
         },
         databases={
-            "cdm_db": CDMDatabaseConfig(
-                connection="cdm_main", schema_name="main", vocab_schema="main"
-            )
+            "cdm_db": CDMDatabaseConfig(connection="cdm_main")
         },
         tools={
             "ohdsi_prompt_registry": {
@@ -481,7 +477,7 @@ def test_an_existing_packs_root_survives_an_unrelated_console_edit(
     )
     assert controller.apply().applied
 
-    saved = load_stack_config_from_path(path)
+    saved = load_stack_config(path)
     assert saved.tools["ohdsi_prompt_registry"]["packs_root"] == [
         "/shared/packs",
         "/home/analyst/packs",
