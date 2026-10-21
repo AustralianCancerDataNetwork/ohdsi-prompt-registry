@@ -47,6 +47,7 @@ constraint-dependencies = ["setuptools>=83.0.0"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = [".", "src"]
 
 [tool.ruff]
 src = ["src", "tests"]
