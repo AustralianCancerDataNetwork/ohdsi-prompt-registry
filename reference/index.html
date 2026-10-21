@@ -13,8 +13,10 @@
         <link rel="canonical" href="https://AustralianCancerDataNetwork.github.io/ohdsi-prompt-registry/reference/">
       
       
-        <link rel="prev" href="../development/">
+        <link rel="prev" href="../tool-reference/">
       
+      
+        <link rel="next" href="../development/">
       
       
         
@@ -25,7 +27,7 @@
     
     
       
-        <title>API reference - OHDSI Prompt Registry</title>
+        <title>Python API - OHDSI Prompt Registry</title>
       
     
     
@@ -68,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#api-reference" class="md-skip">
+        <a href="#python-api-reference" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              API reference
+              Python API
             
           </span>
         </div>
@@ -250,15 +252,69 @@
   
   
   
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Using packs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Using packs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
     <li class="md-nav__item">
-      <a href="../sources/" class="md-nav__link">
+      <a href="../research-questions/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Pack sources
+    Working on a research question
   
 
     
@@ -267,6 +323,70 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../interactions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Questions and workflow decisions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Choosing pack sources
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -285,7 +405,7 @@
   <span class="md-ellipsis">
     
   
-    Pack format
+    Authoring packs
   
 
     
@@ -302,17 +422,71 @@
       
   
   
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
   
   
     <li class="md-nav__item">
-      <a href="../development/" class="md-nav__link">
+      <a href="../tool-reference/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Development
+    Tools and structured handoffs
   
 
     
@@ -324,9 +498,10 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
     
@@ -348,7 +523,7 @@
   <span class="md-ellipsis">
     
   
-    API reference
+    Python API
   
 
     
@@ -366,7 +541,7 @@
   <span class="md-ellipsis">
     
   
-    API reference
+    Python API
   
 
     
@@ -1183,6 +1358,95 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#selected-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Selected content
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        content
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="content">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.content.content_response" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        content_response
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.content.get_content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_content
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paired-elicitation-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paired elicitation validation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.elicitation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        elicitation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="elicitation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.elicitation.validate_elicitation_response" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        validate_elicitation_response
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1242,6 +1506,41 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2064,6 +2363,95 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#selected-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Selected content
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        content
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="content">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.content.content_response" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        content_response
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.content.get_content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_content
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paired-elicitation-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paired elicitation validation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.elicitation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        elicitation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="elicitation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ohdsi_prompt_registry.elicitation.validate_elicitation_response" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        validate_elicitation_response
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2137,6 +2525,46 @@
   
 
 
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href=".." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../tool-reference/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Reference
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
               
               <article class="md-content__inner md-typeset">
                 
@@ -2147,9 +2575,9 @@
   
 
 
-<h1 id="api-reference">API reference<a class="headerlink" href="#api-reference" title="Permanent link">&para;</a></h1>
+<h1 id="python-api-reference">Python API reference<a class="headerlink" href="#python-api-reference" title="Permanent link">&para;</a></h1>
 <p>The MCP tool surface is a thin wrapper over these modules. Most consumers should
-use the tools described in the <a href="../">overview</a>; this reference is for
+use <a href="../tool-reference/">Tools and structured handoffs</a>; this reference is for
 authors embedding the registry directly in a Python service.</p>
 <h2 id="catalogue">Catalogue<a class="headerlink" href="#catalogue" title="Permanent link">&para;</a></h2>
 
@@ -4296,6 +4724,170 @@ authors embedding the registry directly in a Python service.</p>
     <div class="doc doc-contents ">
 
         <p>Reject a declared schema that is invalid under its stated dialect.</p>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div><h2 id="selected-content">Selected content<a class="headerlink" href="#selected-content" title="Permanent link">&para;</a></h2>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="ohdsi_prompt_registry.content" class="doc doc-heading">
+            <span class="doc doc-object-name doc-module-name">ohdsi_prompt_registry.content</span>
+
+
+<a href="#ohdsi_prompt_registry.content" class="headerlink" title="Permanent link">&para;</a></h2>
+
+    <div class="doc doc-contents first">
+
+        <p>Bounded, transport-neutral envelopes for explicitly selected pack content.</p>
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="ohdsi_prompt_registry.content.content_response" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">content_response</span>
+
+
+<a href="#ohdsi_prompt_registry.content.content_response" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">content_response</span><span class="p">(</span>
+    <span class="n">pack</span><span class="p">:</span> <span class="n">LoadedPack</span><span class="p">,</span>
+    <span class="n">kind</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">content</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="n">mime_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Identify current content; omit rather than truncate an oversized response.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="ohdsi_prompt_registry.content.get_content" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">get_content</span>
+
+
+<a href="#ohdsi_prompt_registry.content.get_content" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">get_content</span><span class="p">(</span>
+    <span class="n">service</span><span class="p">:</span> <span class="n">PromptRegistryService</span><span class="p">,</span>
+    <span class="n">pack</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"instructions"</span><span class="p">,</span>
+    <span class="n">kind</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"document"</span><span class="p">,</span>
+    <span class="n">arguments</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Read one declared item without loading related reference bodies.</p>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div><h2 id="paired-elicitation-validation">Paired elicitation validation<a class="headerlink" href="#paired-elicitation-validation" title="Permanent link">&para;</a></h2>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="ohdsi_prompt_registry.elicitation" class="doc doc-heading">
+            <span class="doc doc-object-name doc-module-name">ohdsi_prompt_registry.elicitation</span>
+
+
+<a href="#ohdsi_prompt_registry.elicitation" class="headerlink" title="Permanent link">&para;</a></h2>
+
+    <div class="doc doc-contents first">
+
+        <p>Request/result checks that cannot be expressed by two standalone schemas.</p>
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="ohdsi_prompt_registry.elicitation.validate_elicitation_response" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">validate_elicitation_response</span>
+
+
+<a href="#ohdsi_prompt_registry.elicitation.validate_elicitation_response" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">validate_elicitation_response</span><span class="p">(</span>
+    <span class="n">service</span><span class="p">:</span> <span class="n">PromptRegistryService</span><span class="p">,</span>
+    <span class="n">request</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+    <span class="n">result</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Check effective pack schemas, then request identity and answer constraints.</p>
+<p>Current revision, replay handling, domain suitability, and workflow readiness
+remain caller responsibilities. This function does not collect user input.</p>
 
 
     </div>

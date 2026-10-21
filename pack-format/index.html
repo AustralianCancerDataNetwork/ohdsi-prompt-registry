@@ -16,7 +16,7 @@
         <link rel="prev" href="../sources/">
       
       
-        <link rel="next" href="../development/">
+        <link rel="next" href="../tool-reference/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Pack format - OHDSI Prompt Registry</title>
+        <title>Authoring packs - OHDSI Prompt Registry</title>
       
     
     
@@ -70,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#pack-format" class="md-skip">
+        <a href="#authoring-a-prompt-pack" class="md-skip">
           Skip to content
         </a>
       
@@ -106,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Pack format
+              Authoring packs
             
           </span>
         </div>
@@ -252,15 +252,69 @@
   
   
   
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Using packs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Using packs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
     <li class="md-nav__item">
-      <a href="../sources/" class="md-nav__link">
+      <a href="../research-questions/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Pack sources
+    Working on a research question
   
 
     
@@ -269,6 +323,70 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../interactions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Questions and workflow decisions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Choosing pack sources
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -296,7 +414,7 @@
   <span class="md-ellipsis">
     
   
-    Pack format
+    Authoring packs
   
 
     
@@ -314,7 +432,7 @@
   <span class="md-ellipsis">
     
   
-    Pack format
+    Authoring packs
   
 
     
@@ -340,10 +458,93 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#extending-a-pack-safely" class="md-nav__link">
+  <a href="#start-with-scope-and-boundaries" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Extending a pack safely
+        Start with scope and boundaries
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#separate-instructions-from-optional-explanation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Separate instructions from optional explanation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#use-structure-where-a-consumer-needs-a-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use structure where a consumer needs a contract
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#declare-the-pack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Declare the pack
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Declare the pack">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reference-a-schema-from-instructions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reference a schema from instructions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#separate-drafts-from-complete-handoffs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Separate drafts from complete handoffs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#choose-a-distribution-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Choose a distribution layout
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#check-the-pack-as-a-consumer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Check the pack as a consumer
       
     </span>
   </a>
@@ -364,15 +565,69 @@
   
   
   
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
     <li class="md-nav__item">
-      <a href="../development/" class="md-nav__link">
+      <a href="../tool-reference/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Development
+    Tools and structured handoffs
   
 
     
@@ -384,9 +639,10 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
@@ -399,7 +655,42 @@
   <span class="md-ellipsis">
     
   
-    API reference
+    Python API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
   
 
     
@@ -439,10 +730,93 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#extending-a-pack-safely" class="md-nav__link">
+  <a href="#start-with-scope-and-boundaries" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Extending a pack safely
+        Start with scope and boundaries
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#separate-instructions-from-optional-explanation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Separate instructions from optional explanation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#use-structure-where-a-consumer-needs-a-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use structure where a consumer needs a contract
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#declare-the-pack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Declare the pack
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Declare the pack">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reference-a-schema-from-instructions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reference a schema from instructions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#separate-drafts-from-complete-handoffs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Separate drafts from complete handoffs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#choose-a-distribution-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Choose a distribution layout
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#check-the-pack-as-a-consumer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Check the pack as a consumer
       
     </span>
   </a>
@@ -477,8 +851,20 @@
   
 
 
-<h1 id="pack-format">Pack format<a class="headerlink" href="#pack-format" title="Permanent link">&para;</a></h1>
-<p>Every source uses the same contract. A minimal manifest with a user-facing prompt looks like this:</p>
+<h1 id="authoring-a-prompt-pack">Authoring a prompt pack<a class="headerlink" href="#authoring-a-prompt-pack" title="Permanent link">&para;</a></h1>
+<p>Build a pack around a defined responsibility: a task to guide, a decision to clarify, or a structured handoff to support. All <a href="../sources/">pack sources</a> use the same manifest contract.</p>
+<h2 id="start-with-scope-and-boundaries">Start with scope and boundaries<a class="headerlink" href="#start-with-scope-and-boundaries" title="Permanent link">&para;</a></h2>
+<p>Describe when the pack is useful, what information it needs, and what result it helps produce. State which domain judgements belong to the caller. A generic questioning capability, for example, can establish that an answer is understood while leaving study feasibility to the domain workflow.</p>
+<p>Keep responsibilities separable. A workflow can call on elicitation without duplicating its presentation rules. A clarification should also be usable without inventing a workflow around it. Examples should show both a normal result and a meaningful unresolved or review path.</p>
+<h2 id="separate-instructions-from-optional-explanation">Separate instructions from optional explanation<a class="headerlink" href="#separate-instructions-from-optional-explanation" title="Permanent link">&para;</a></h2>
+<p>Put essential operational rules in the core instructions. Declare orientation, rationale, and longer examples as separate documents, with descriptions saying when to read them. An unfamiliar agent can request the relevant background while a routine invocation reads only the core.</p>
+<p>A declared prompt should select the core document. Selected-content retrieval returns reference metadata without recursively loading document bodies or related packs. Links and <code>see_also</code> entries describe relationships; they are not executable includes.</p>
+<p>Essential boundaries must be understandable from the core alone. Optional explanations should expand those boundaries rather than introduce hidden requirements.</p>
+<h2 id="use-structure-where-a-consumer-needs-a-contract">Use structure where a consumer needs a contract<a class="headerlink" href="#use-structure-where-a-consumer-needs-a-contract" title="Permanent link">&para;</a></h2>
+<p>Use JSON Schema when another tool or service needs to check an input or result. Decision guidance can remain prose when a machine-readable result serves no purpose. A pack can declare <code>schemas: {}</code> and <code>render: {}</code> when it needs neither validation nor rendering.</p>
+<p>A schema expresses fields and permitted values. Instructions explain how to make the decision, handle uncertainty, and obtain the necessary evidence. Keep domain suitability, user approval, and contract validity distinct.</p>
+<h2 id="declare-the-pack">Declare the pack<a class="headerlink" href="#declare-the-pack" title="Permanent link">&para;</a></h2>
+<p>This example publishes a review prompt and an input schema:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-site-review</span>
 <span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Site review workflow</span>
 <span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">"1.0"</span>
@@ -492,11 +878,11 @@
 <span class="w">  </span><span class="nt">instructions</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">instructions.md</span>
 <span class="w">    </span><span class="nt">mime_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">text/markdown</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Instructions for the review workflow.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Core instructions for the review workflow.</span>
 <span class="w">  </span><span class="nt">examples</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">examples.yaml</span>
+<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">examples.json</span>
 <span class="w">    </span><span class="nt">mime_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">application/json</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Valid request and result examples.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Read when a normal or unresolved review needs illustration.</span>
 
 <span class="nt">schemas</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">request</span><span class="p">:</span>
@@ -517,34 +903,89 @@
 <span class="nt">requires_tools</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
 <span class="nt">tool_prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">site</span>
 </code></pre></div>
-<p>The important fields are:</p>
-<ul>
-<li><code>documents</code> are the text or structured resources an analyst or agent can read.</li>
-<li><code>schemas</code> are JSON Schema contracts used by <code>ohdsi_prompt_registry_validate</code>.</li>
-<li><code>prompts</code> opt a document into the MCP prompt list. The published name is <code>&lt;tool_prefix&gt;_&lt;prompt key&gt;</code>.</li>
-<li><code>render</code> declares deterministic Markdown renderers. Use <code>{}</code> when a pack only needs instructions and validation.</li>
-<li><code>requires_tools</code> advertises dependencies. It does not disable the pack; missing dependencies appear in readiness and should be handled in the workflow.</li>
-<li><code>applicability.tags</code> helps analysts find a pack. <code>always: true</code> makes it appear in every tag-filtered catalogue query.</li>
-</ul>
-<p>An instructions document can embed the current schema with a placeholder:</p>
+<p>The files named in the manifest must exist. The published prompt name is <code>site_review</code>; prompt arguments are strings, including JSON encoded as text.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code>, <code>version</code></td>
+<td>Stable identity and content version. The name also selects overrides.</td>
+</tr>
+<tr>
+<td><code>scope_summary</code>, descriptions</td>
+<td>Help people and agents choose the pack and its documents.</td>
+</tr>
+<tr>
+<td><code>documents</code></td>
+<td>Declare readable text or structured resources.</td>
+</tr>
+<tr>
+<td><code>schemas</code></td>
+<td>Declare JSON Schemas used by validation.</td>
+</tr>
+<tr>
+<td><code>prompts</code></td>
+<td>Publish selected documents in the MCP prompt list.</td>
+</tr>
+<tr>
+<td><code>render</code></td>
+<td>Declare optional deterministic Markdown renderers.</td>
+</tr>
+<tr>
+<td><code>requires_tools</code></td>
+<td>Advertise dependencies; missing tools appear in readiness without disabling discovery.</td>
+</tr>
+<tr>
+<td><code>applicability</code></td>
+<td>Support discovery by tags. <code>always: true</code> includes the pack in every tag-filtered catalogue query.</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>always</code> flag affects catalogue inclusion. It does not automatically load instructions or establish a universal domain rule. Scope and applicability still need to be accurate.</p>
+<h3 id="reference-a-schema-from-instructions">Reference a schema from instructions<a class="headerlink" href="#reference-a-schema-from-instructions" title="Permanent link">&para;</a></h3>
+<p>When a schema is essential to a prompt, use a placeholder rather than maintaining a second copy:</p>
 <div class="highlight"><pre><span></span><code><span class="gu">## Input contract</span>
 
 Provide a document conforming to:
 
 {{schema:request}}
 </code></pre></div>
-<p>The placeholder is replaced when the document is read. A misspelled or undeclared schema placeholder rejects the pack at load time.</p>
-<h2 id="extending-a-pack-safely">Extending a pack safely<a class="headerlink" href="#extending-a-pack-safely" title="Permanent link">&para;</a></h2>
-<p>Use the same steps regardless of source:</p>
+<p>The placeholder expands when the document is read. A misspelled or undeclared schema placeholder rejects the pack at load time. Expanded schemas increase the selected content size, so include only essential contracts inline and expose other schemas as separate reads.</p>
+<h2 id="separate-drafts-from-complete-handoffs">Separate drafts from complete handoffs<a class="headerlink" href="#separate-drafts-from-complete-handoffs" title="Permanent link">&para;</a></h2>
+<p>A pack can declare several ordinary schemas and renderers for the same task. The research-question pack, for example, has <code>study_intent</code> for drafts and <code>study_intent_final</code> for complete artifacts. A renderer's <code>schema</code> selects the checks that must pass before it produces Markdown. The generic <code>validate</code> and <code>render</code> tools work with either key.</p>
+<p>Write final requirements in the schema, including conditional requirements where a selected template changes the required fields. Keep local <code>$ref</code> targets and static object properties available to renderer integrity checks; the current renderer does not infer paths through arbitrary <code>allOf</code> compositions. The research final schema exposes its analysis <code>$ref</code> beside its conditional <code>allOf</code> rules.</p>
+<p>If catalogue data also describes requirements or determines review rows, test that it agrees with the schema. For the research pack, that includes template coverage, analytics pairing, required and nullable fields, and unused-field rules. Also check copied draft definitions and renderer parity. These are author checks; runtime validation uses the schema and does not compare independently edited files. Override authors must maintain their own consistent catalogue/schema pair. A schema-valid artifact can otherwise omit important values from its catalogue-driven review table.</p>
+<p>Overrides replace whole packs. If a higher-precedence copy is rejected, an already accepted lower-precedence copy remains active; if no valid copy exists, the pack is unavailable. Inspect <code>ohdsi_prompt_registry_status</code> for rejections and the effective source after installing an override. A shared pack source does not itself guarantee content consistency or atomic file updates. See <a href="../sources/">Pack sources</a>.</p>
+<p>Request/result relationships can still need a dedicated capability check. The paired elicitation tool checks matching identity/revision, offered choices, and free-text policy after validating the individual schemas. It does not prove human provenance or determine the caller's active revision.</p>
+<h2 id="choose-a-distribution-layout">Choose a distribution layout<a class="headerlink" href="#choose-a-distribution-layout" title="Permanent link">&para;</a></h2>
+<p>For a filesystem pack, place the pack directory under a configured root. For bundled content, place it under <code>src/ohdsi_prompt_registry/packs/</code> and release it with the registry.</p>
+<p>A separately distributed pack uses the <code>ohdsi_prompt_registry.packs</code> entry-point group:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[project.entry-points.</span><span class="s2">"ohdsi_prompt_registry.packs"</span><span class="k">]</span>
+<span class="n">my_pack</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"my_pack.packs"</span>
+</code></pre></div>
+<p>The target is a package or directory containing direct child pack directories:</p>
+<div class="highlight"><pre><span></span><code>src/my_pack/packs/
+├── __init__.py
+└── my-installed-pack/
+    ├── manifest.yaml
+    ├── instructions.md
+    └── request.schema.json
+</code></pre></div>
+<p>Include declared content files in the distribution. For configuration and precedence, see <a href="../sources/">Pack sources</a>.</p>
+<h2 id="check-the-pack-as-a-consumer">Check the pack as a consumer<a class="headerlink" href="#check-the-pack-as-a-consumer" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Choose a stable lowercase kebab-case <code>name</code>. It is also the override key.</li>
-<li>Add <code>manifest.yaml</code> and every file named by the manifest.</li>
-<li>Keep analyst-facing scope in <code>scope_summary</code>, document descriptions, and prompt descriptions. Say what the workflow decides and what it does not decide.</li>
-<li>Put operational rules in <code>instructions.md</code>; put machine-checkable shape in JSON Schema. Do not duplicate the schema as prose when a placeholder can expose it.</li>
-<li>Add examples that represent both a normal result and the review or unresolved path.</li>
-<li>Run the pack tests and check <code>ohdsi_prompt_registry_status</code> after installation or configuration.</li>
+<li>Check that scope and core instructions are sufficient without optional background.</li>
+<li>Validate representative structured inputs/results, including unresolved cases where applicable.</li>
+<li>Check prompt resolution and selected reads, including schema expansion and content limits.</li>
+<li>Restart the host after manifest or discovery changes and verify the effective source in status.</li>
+<li>Exercise the intended client: tool availability and presentation behaviour need integration checks beyond schema validation.</li>
 </ol>
-<p>If a filesystem pack intentionally overrides an installed or bundled pack, keep the same <code>name</code> and check the status report for the expected shadow. If it is a new workflow, choose a new name and <code>tool_prefix</code> so analysts can distinguish it in the prompt list.</p>
+<p>The <a href="../tool-reference/">tool reference</a> describes retrieval limits and validation boundaries. The <a href="../development/">development guide</a> covers repository checks.</p>
 
 
 

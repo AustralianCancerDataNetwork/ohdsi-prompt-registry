@@ -13,7 +13,7 @@
         <link rel="canonical" href="https://AustralianCancerDataNetwork.github.io/ohdsi-prompt-registry/sources/">
       
       
-        <link rel="prev" href="..">
+        <link rel="prev" href="../interactions/">
       
       
         <link rel="next" href="../pack-format/">
@@ -27,7 +27,7 @@
     
     
       
-        <title>Pack sources - OHDSI Prompt Registry</title>
+        <title>Choosing pack sources - OHDSI Prompt Registry</title>
       
     
     
@@ -70,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#the-three-pack-sources" class="md-skip">
+        <a href="#choosing-and-configuring-pack-sources" class="md-skip">
           Skip to content
         </a>
       
@@ -106,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Pack sources
+              Choosing pack sources
             
           </span>
         </div>
@@ -254,6 +254,116 @@
   
   
   
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Using packs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Using packs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../research-questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Working on a research question
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../interactions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Questions and workflow decisions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
     <li class="md-nav__item md-nav__item--active">
       
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
@@ -269,7 +379,7 @@
   <span class="md-ellipsis">
     
   
-    Pack sources
+    Choosing pack sources
   
 
     
@@ -287,7 +397,7 @@
   <span class="md-ellipsis">
     
   
-    Pack sources
+    Choosing pack sources
   
 
     
@@ -313,10 +423,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-bundled-packs" class="md-nav__link">
+  <a href="#understand-overrides-before-customising" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Bundled packs
+        Understand overrides before customising
       
     </span>
   </a>
@@ -324,10 +434,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-installed-packs" class="md-nav__link">
+  <a href="#bundled-content" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Installed packs
+        Bundled content
       
     </span>
   </a>
@@ -335,22 +445,33 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-filesystem-packs" class="md-nav__link">
+  <a href="#installed-content" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Filesystem packs
+        Installed content
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Filesystem packs">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#local-and-site-owned-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Local and site-owned content
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Local and site-owned content">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#more-than-one-root" class="md-nav__link">
+  <a href="#shared-and-personal-roots" class="md-nav__link">
     <span class="md-ellipsis">
       
-        More than one root
+        Shared and personal roots
       
     </span>
   </a>
@@ -362,9 +483,28 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#make-configuration-changes-visible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Make configuration changes visible
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
       
     </li>
   
@@ -384,7 +524,7 @@
   <span class="md-ellipsis">
     
   
-    Pack format
+    Authoring packs
   
 
     
@@ -393,6 +533,123 @@
   
 
       </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tool-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tools and structured handoffs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -412,33 +669,6 @@
     
   
     Development
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../reference/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API reference
   
 
     
@@ -478,10 +708,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-bundled-packs" class="md-nav__link">
+  <a href="#understand-overrides-before-customising" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Bundled packs
+        Understand overrides before customising
       
     </span>
   </a>
@@ -489,10 +719,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-installed-packs" class="md-nav__link">
+  <a href="#bundled-content" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Installed packs
+        Bundled content
       
     </span>
   </a>
@@ -500,22 +730,33 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-filesystem-packs" class="md-nav__link">
+  <a href="#installed-content" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Filesystem packs
+        Installed content
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Filesystem packs">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#local-and-site-owned-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Local and site-owned content
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Local and site-owned content">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#more-than-one-root" class="md-nav__link">
+  <a href="#shared-and-personal-roots" class="md-nav__link">
     <span class="md-ellipsis">
       
-        More than one root
+        Shared and personal roots
       
     </span>
   </a>
@@ -524,6 +765,17 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#make-configuration-changes-visible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Make configuration changes visible
+      
+    </span>
+  </a>
   
 </li>
       
@@ -545,6 +797,46 @@
   
 
 
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href=".." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../research-questions/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Using packs
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
               
               <article class="md-content__inner md-typeset">
                 
@@ -555,112 +847,94 @@
   
 
 
-<h1 id="the-three-pack-sources">The three pack sources<a class="headerlink" href="#the-three-pack-sources" title="Permanent link">&para;</a></h1>
-<p>These are three ways to distribute the same kind of pack. They are not three manifest formats.</p>
+<h1 id="choosing-and-configuring-pack-sources">Choosing and configuring pack sources<a class="headerlink" href="#choosing-and-configuring-pack-sources" title="Permanent link">&para;</a></h1>
+<p>Choose a source according to who maintains the guidance and how you want to distribute it. All sources use the same pack format; a source describes where content comes from, rather than what kind of decision it supports.</p>
 <table>
 <thead>
 <tr>
 <th>Source</th>
-<th>Best for</th>
+<th>Useful for</th>
 <th style="text-align: right;">Precedence</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Bundled</td>
-<td>The registry’s maintained baseline content.</td>
+<td>Baseline content released with the registry.</td>
 <td style="text-align: right;">Lowest</td>
 </tr>
 <tr>
 <td>Installed</td>
-<td>Versioned content shipped by another Python distribution.</td>
+<td>Shared content distributed and versioned separately.</td>
 <td style="text-align: right;">Middle</td>
 </tr>
 <tr>
 <td>Filesystem</td>
-<td>Site-owned content, local development, or an intentional override.</td>
+<td>Site-owned guidance, local development, or an intentional override.</td>
 <td style="text-align: right;">Highest</td>
 </tr>
 </tbody>
 </table>
-<p>If two valid packs have the same <code>name</code>, the later source replaces the earlier one: filesystem &gt; installed &gt; bundled. The registry reports the replaced pack as a shadow in <code>ohdsi_prompt_registry_status</code>; it does not merge files from both copies. This can be done intentionally to override defaults with site-specific handling as required.</p>
-<p>A malformed pack is rejected independently, so it cannot prevent sibling packs from loading.</p>
-<h3 id="1-bundled-packs">1. Bundled packs<a class="headerlink" href="#1-bundled-packs" title="Permanent link">&para;</a></h3>
-<p>Bundled packs ship inside <code>ohdsi-prompt-registry</code>. They are available by default and are the right place for a generally useful, versioned baseline.</p>
-<p>Configure or disable them:</p>
+<pre class="mermaid"><code>flowchart TD
+    accTitle: How pack sources form the active catalogue
+    accDescr: Valid, enabled packs from bundled, installed, and filesystem sources are selected by name. Filesystem takes priority over installed, then bundled. Different names coexist; lower-priority copies of the same name are shadowed, not merged.
+    BUNDLED["Bundled&lt;br/&gt;Registry release"] --&gt; SELECT["Choose a copy for each pack name&lt;br/&gt;Filesystem &gt; installed &gt; bundled"]
+    INSTALLED["Installed&lt;br/&gt;Content distributions"] --&gt; SELECT
+    FILESYSTEM["Filesystem&lt;br/&gt;Local or site-owned directories"] --&gt; SELECT
+    SELECT --&gt; ACTIVE["Active catalogue&lt;br/&gt;One effective pack per name"]
+    SELECT -.-&gt; SHADOWED["Other copies of the same name&lt;br/&gt;Reported as shadowed"]</code></pre>
+<p>Use the catalogue to see available content and <code>ohdsi_prompt_registry_status</code> to check its effective source. Discovery makes guidance available to an agent; it does not establish its clinical authority or make every pack apply to every task.</p>
+<h2 id="understand-overrides-before-customising">Understand overrides before customising<a class="headerlink" href="#understand-overrides-before-customising" title="Permanent link">&para;</a></h2>
+<p>A pack's manifest <code>name</code> is its identity. If two valid packs have the same name, the higher-precedence source replaces the entire lower-precedence pack. Files from the two copies are not merged. Status reports the shadowed source so a local override is visible.</p>
+<p>Use the same name when deliberately replacing an existing contract. Use a different name when offering a separate workflow or alternative approach. Check the effective source after configuration so you know which instructions your team is using.</p>
+<p>A malformed pack is rejected independently; sibling packs can still load. Status distinguishes rejection from a valid pack being shadowed.</p>
+<h2 id="bundled-content">Bundled content<a class="headerlink" href="#bundled-content" title="Permanent link">&para;</a></h2>
+<p>Bundled packs ship inside <code>ohdsi-prompt-registry</code> and are available by default. They include research-question guidance and the generic elicitation and workflow-management capabilities.</p>
 <div class="highlight"><pre><span></span><code><span class="k">[tools.ohdsi_prompt_registry]</span>
 <span class="n">include_bundled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 </code></pre></div>
-<p>Use the bundled reference workflow:</p>
-<div class="highlight"><pre><span></span><code>MCP prompt: rqt_structure_question
-Optional argument: question = "Does semaglutide reduce cardiovascular risk?"
-</code></pre></div>
-<p>To extend the bundled source, add a sibling directory under <code>src/ohdsi_prompt_registry/packs/</code> and give it the normal pack layout:</p>
-<div class="highlight"><pre><span></span><code>src/ohdsi_prompt_registry/packs/
-└── my-bundled-pack/
-    ├── manifest.yaml
-    ├── instructions.md
-    └── request.schema.json
-</code></pre></div>
-<p>The pack becomes available when the registry distribution is rebuilt and installed. Use this source for content that should be reviewed and released with the registry itself. For a site-local change, use a filesystem pack instead.</p>
-<h3 id="2-installed-packs">2. Installed packs<a class="headerlink" href="#2-installed-packs" title="Permanent link">&para;</a></h3>
-<p>An installed pack is content contributed by another Python distribution. This is the option for a separately versioned workflow such as <code>omop-concept-grounding</code>.</p>
-<p>The registry reads the <code>ohdsi_prompt_registry.packs</code> entry-point group when <code>include_installed</code> is true (the default):</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># pyproject.toml in the content distribution</span>
-<span class="k">[project.entry-points.</span><span class="s2">"ohdsi_prompt_registry.packs"</span><span class="k">]</span>
-<span class="n">my_pack</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"my_pack.packs"</span>
-</code></pre></div>
-<p>The entry-point target is a package or directory containing direct child pack directories:</p>
-<div class="highlight"><pre><span></span><code>src/my_pack/packs/
-├── __init__.py
-└── my-installed-pack/
-    ├── manifest.yaml
-    ├── instructions.md
-    └── request.schema.json
-</code></pre></div>
-<p>Install the distribution, restart Groundworkers, and invoke the prompt declared in its manifest. For example, the installed grounding distribution publishes <code>ocg_ground_concepts</code> and the resources under <code>prompt-registry://omop-concept-grounding/</code>.</p>
-<p>To restrict discovery to a known set while leaving the source enabled:</p>
+<p>Choose bundled content when its scope fits your task. A site-specific change can be maintained as a filesystem pack without modifying the registry distribution.</p>
+<h2 id="installed-content">Installed content<a class="headerlink" href="#installed-content" title="Permanent link">&para;</a></h2>
+<p>Installed packs come from separate Python distributions, such as <code>omop-concept-grounding</code>. Install the distribution into the environment running Groundworkers and restart the host so discovery can register its packs.</p>
+<p>Installed discovery is enabled by default. An optional allow-list restricts the active set across sources:</p>
 <div class="highlight"><pre><span></span><code><span class="k">[tools.ohdsi_prompt_registry]</span>
 <span class="n">include_installed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 <span class="n">enabled_packs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">"omop-concept-grounding"</span><span class="p">]</span>
 </code></pre></div>
-<p>The allow-list uses the manifest <code>name</code>, not the Python distribution or entry-point name.</p>
-<h3 id="3-filesystem-packs">3. Filesystem packs<a class="headerlink" href="#3-filesystem-packs" title="Permanent link">&para;</a></h3>
-<p>Filesystem packs are useful for site-owned analyst workflows and rapid review. Set <code>packs_root</code> to a directory whose direct children are packs:</p>
+<p>The allow-list uses manifest names, rather than distribution or entry-point names. Inspect the catalogue after installation to see each pack's instructions, resources, and published prompts.</p>
+<h2 id="local-and-site-owned-content">Local and site-owned content<a class="headerlink" href="#local-and-site-owned-content" title="Permanent link">&para;</a></h2>
+<p>Use filesystem packs for local guidance or a working copy of shared content. Set <code>packs_root</code> to a directory whose direct children are packs:</p>
 <div class="highlight"><pre><span></span><code><span class="k">[tools.ohdsi_prompt_registry]</span>
 <span class="n">packs_root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"./prompt-packs"</span>
 <span class="n">include_bundled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 <span class="n">include_installed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 </code></pre></div>
-<p>The path is relative to the configuration file when Groundworkers supplies <code>OA_CONFIG_PATH</code>; an absolute path is unambiguous in standalone launches. The directory shape is:</p>
+<p>A typical layout is:</p>
 <div class="highlight"><pre><span></span><code>prompt-packs/
 └── my-site-review/
     ├── manifest.yaml
     ├── instructions.md
-    ├── examples.yaml
     └── request.schema.json
 </code></pre></div>
-<p>After adding or removing a pack directory, restart Groundworkers so the MCP resource and prompt lists are rebuilt. Changes to files already declared by an active pack are read on demand, so they do not require repackaging.</p>
-<h4 id="more-than-one-root">More than one root<a class="headerlink" href="#more-than-one-root" title="Permanent link">&para;</a></h4>
-<p><code>packs_root</code> accepts a list, in ascending precedence: a pack in a later directory shadows one of the same name in an earlier directory, and shadows the bundled and installed sets too. A single directory may still be written as a bare string, and one written that way behaves exactly as it always has.</p>
+<p>Relative paths are anchored to the configuration file when Groundworkers supplies <code>OA_CONFIG_PATH</code>. Use an absolute path for an unambiguous standalone launch.</p>
+<p>Set <code>packs_root</code> in the configuration file; the setup console does not expose that field. An existing value is preserved when other fields are edited through the console.</p>
+<h3 id="shared-and-personal-roots">Shared and personal roots<a class="headerlink" href="#shared-and-personal-roots" title="Permanent link">&para;</a></h3>
+<p>To keep shared guidance alongside personal working copies, supply roots in ascending precedence:</p>
 <div class="highlight"><pre><span></span><code><span class="k">[tools.ohdsi_prompt_registry]</span>
 <span class="n">packs_root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">"/srv/shared/prompt-packs"</span><span class="p">,</span><span class="w"> </span><span class="s2">"~/work/my-packs"</span><span class="p">]</span>
 </code></pre></div>
-<p>This is how a pack is edited without repackaging the distribution that ships it. Point the last root at a working copy of an installed pack, and the working copy wins; <code>ohdsi_prompt_registry_status</code> names both, so an override is visible rather than mysterious:</p>
-<div class="highlight"><pre><span></span><code>Shadowed pack: cqi-indicator-design: filesystem:/home/analyst/work/my-packs
-    Overrides installed:cqi_workers.
-</code></pre></div>
-<p>Each root is resolved on its own. One that cannot be anchored, or does not exist, gets its own warning row and costs only its own packs — the rest still load.</p>
-<blockquote>
-<p>The setup console cannot edit <code>packs_root</code>, because the host's generic configuration workflow builds no field for an optional list. Set it in the configuration file. An existing value is preserved when other fields are edited through the console.</p>
-</blockquote>
-<p>To use the filesystem source alone, which is useful for testing an override:</p>
+<p>A pack in the later directory replaces a pack of the same name in an earlier directory, as well as installed or bundled copies. A single root can be supplied as a string. Each root is resolved independently; an unavailable root produces a warning without preventing the others from loading.</p>
+<p>To use only a known local set:</p>
 <div class="highlight"><pre><span></span><code><span class="k">[tools.ohdsi_prompt_registry]</span>
 <span class="n">packs_root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"/srv/groundcrew/prompt-packs"</span>
 <span class="n">include_bundled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
 <span class="n">include_installed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
 <span class="n">enabled_packs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">"my-site-review"</span><span class="p">]</span>
 </code></pre></div>
+<h2 id="make-configuration-changes-visible">Make configuration changes visible<a class="headerlink" href="#make-configuration-changes-visible" title="Permanent link">&para;</a></h2>
+<p>Restart Groundworkers after adding or removing pack directories, changing manifests, or installing content distributions. The host retains its discovered pack set for the process lifetime. Files already declared by an active pack are read on demand, so editing their contents does not require repackaging.</p>
+<p>After a restart, inspect status and retrieve the intended instructions. Confirm the effective source, version, and content identity, especially when resuming work or testing an override. Editing source files alone does not restart a running host.</p>
+<p>For the content contract and distribution layout, see <a href="../pack-format/">Authoring a prompt pack</a>.</p>
 
 
 
