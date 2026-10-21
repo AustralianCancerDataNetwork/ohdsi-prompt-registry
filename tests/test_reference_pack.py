@@ -6,7 +6,9 @@ def test_reference_pack_loads_without_diagnostics() -> None:
     catalogue = PromptPackCatalogue([BundledSource()])
 
     assert [pack.manifest.name for pack in catalogue.all()] == [
-        "ohdsi-question-templates"
+        "ohdsi-question-templates",
+        "user-elicitation",
+        "workflow-management",
     ]
     assert catalogue.rejections == []
     assert catalogue.shadows == []

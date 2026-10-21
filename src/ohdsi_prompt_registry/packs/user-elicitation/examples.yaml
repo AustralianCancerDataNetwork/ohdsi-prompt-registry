@@ -1,0 +1,95 @@
+choice:
+  request: &id001
+    contract_version: '1.0'
+    request_id: comparison-1
+    revision: 1
+    goal: Identify the intended comparison
+    context: The caller has supplied two candidate treatments; suitability is checked
+      by the caller.
+    answer_spec: &id002
+      kind: single_choice
+      choices:
+      - id: a
+        label: Treatment A
+      - id: b
+        label: Treatment B
+      allow_free_text: true
+  result:
+    contract_version: '1.0'
+    request_id: comparison-1
+    revision: 1
+    status: answered
+    answer:
+      kind: single_choice
+      choice_id: b
+    source: user
+    reason: null
+standalone_text:
+  request:
+    contract_version: '1.0'
+    request_id: preference-1
+    revision: 1
+    goal: Ask how detailed the explanation should be
+    answer_spec:
+      kind: text
+  result:
+    contract_version: '1.0'
+    request_id: preference-1
+    revision: 1
+    status: answered
+    answer:
+      kind: text
+      text: A short explanation with one example.
+    source: user
+    reason: null
+outside_choices:
+  request: *id001
+  result:
+    contract_version: '1.0'
+    request_id: comparison-1
+    revision: 1
+    status: answered
+    answer:
+      kind: text
+      text: Neither; I intend another treatment.
+    source: user
+    reason: null
+deferred:
+  request: *id001
+  result:
+    contract_version: '1.0'
+    request_id: comparison-1
+    revision: 1
+    status: deferred
+    answer: null
+    source: user
+    reason: The user will decide after reviewing the candidates.
+cancelled:
+  request: *id001
+  result:
+    contract_version: '1.0'
+    request_id: comparison-1
+    revision: 1
+    status: unresolved
+    answer: null
+    source: none
+    reason: The question was cancelled without an answer; no refusal was inferred.
+revised:
+  request:
+    contract_version: '1.0'
+    request_id: comparison-1
+    revision: 2
+    goal: Identify the intended comparison
+    context: The caller has supplied two candidate treatments; suitability is checked
+      by the caller.
+    answer_spec: *id002
+  result:
+    contract_version: '1.0'
+    request_id: comparison-1
+    revision: 2
+    status: answered
+    answer:
+      kind: single_choice
+      choice_id: a
+    source: user
+    reason: null

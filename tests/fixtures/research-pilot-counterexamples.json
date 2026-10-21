@@ -1,0 +1,43 @@
+[
+  {
+    "name": "empty_analyses",
+    "document": {
+      "analyses": []
+    },
+    "current_schema_valid": true
+  },
+  {
+    "name": "missing_required_study_parameters",
+    "document": {
+      "analyses": [
+        {
+          "analytics_type": "effect_estimation",
+          "template_name": "cohort_method",
+          "parameters": {}
+        }
+      ]
+    },
+    "current_schema_valid": true
+  },
+  {
+    "name": "mismatched_template_and_analytics_type",
+    "document": {
+      "analyses": [
+        {
+          "analytics_type": "patient_level_prediction",
+          "template_name": "cohort_method",
+          "parameters": {}
+        }
+      ]
+    },
+    "current_schema_valid": true
+  },
+  {
+    "name": "unknown_root_property",
+    "document": {
+      "analyses": [],
+      "invented": true
+    },
+    "current_schema_valid": true
+  }
+]

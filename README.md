@@ -1,95 +1,25 @@
 # OHDSI Prompt Registry
 
-The OHDSI Prompt Registry makes reviewed prompt workflows discoverable through Groundworkers MCP. A pack can publish instructions, JSON Schemas, examples, deterministic Markdown rendering, and an optional user-facing MCP prompt.
+Reusable prompt packs for agents working through Groundworkers. A pack brings together instructions and, where useful, examples, structured contracts, and review formats for a defined task.
 
-To see what is available before choosing a workflow:
+Start with the decision you need to make:
 
-Call `ohdsi_prompt_registry_catalogue` with:
+> Find a prompt pack to help us turn our study idea into a research question. Explain its scope and ask about the information we still need to provide.
 
-```json
-{}
-```
+The registry makes packs discoverable through MCP. Your agent applies the guidance, asks questions, and uses the available domain tools. Workflow guidance coordinates decisions; user elicitation collects answers; domain guidance determines what makes a result suitable. These responsibilities can be combined without making every clarification a full workflow.
 
-The response lists each active pack, its scope, tags, source, documents, schemas, prompts, renderers, and advertised tool dependencies. Filter by a tag when the catalogue is large:
-
-Call it with a tag filter:
-
-```json
-{"tags": ["concept-mapping"]}
-```
-
-Then inspect the pack’s manifest and instructions. A resource-capable client can read the URIs returned in the catalogue. A client without resource browsing can ask for links:
-
-Call `ohdsi_prompt_registry_links` with:
-
-```json
-{"pack": "omop-concept-grounding"}
-```
-
-The registry also exposes a small, stable tool surface:
-
-| Tool | Use it for |
-| --- | --- |
-| `ohdsi_prompt_registry_catalogue` | Find packs by scope or tag. |
-| `ohdsi_prompt_registry_links` | Get the manifest, documents, and schemas for one pack. |
-| `ohdsi_prompt_registry_validate` | Check a request or result against a pack schema. |
-| `ohdsi_prompt_registry_render` | Turn a valid document into a human-readable Markdown review. |
-| `ohdsi_prompt_registry_status` | See active packs, rejected packs, overrides, and missing tool dependencies. |
-
-Declared workflows appear in the MCP prompt list. Current examples include:
-
-```text
-rqt_structure_question   # bundled research-question workflow
-ocg_ground_concepts      # installed concept-grounding workflow
-gdc_classify_fields      # filesystem Groundcrew workflow
-gsc_classify_columns     # filesystem Groundcrew workflow
-```
-
-Invoke a prompt by its published name. Prompt arguments are strings; JSON inputs are passed as JSON text:
-
-Call `ocg_ground_concepts` with:
-
-```json
-{
-  "mapping_request": "{\"items\":[{\"item_id\":\"dx-1\",\"label\":\"Type 2 diabetes mellitus\"}]}"
-}
-```
-
-For a workflow that returns a JSON document, validate it before treating it as an operational handoff:
-
-Call `ohdsi_prompt_registry_validate` with:
-
-```json
-{
-  "pack": "omop-concept-grounding",
-  "schema": "mapping_decision",
-  "document": "{...}"
-}
-```
-
-The instructions in each pack state which schemas and domain tools apply. The registry supplies the current schema at read time, so the instructions and contract do not need to be kept in separate prompt copies.
+Core instructions can be read on their own, with orientation and examples available separately. JSON Schemas are useful for structured handoffs, but a valid document still needs the relevant scientific or operational review.
 
 ## Documentation
 
-Full documentation: <https://AustralianCancerDataNetwork.github.io/ohdsi-prompt-registry>
+Start with the [user guide](https://AustralianCancerDataNetwork.github.io/ohdsi-prompt-registry/).
 
-- **[Pack sources](https://AustralianCancerDataNetwork.github.io/ohdsi-prompt-registry/sources/)** — bundled, installed, and filesystem packs, and which one wins when two packs share a name.
-- **[Pack format](https://AustralianCancerDataNetwork.github.io/ohdsi-prompt-registry/pack-format/)** — the manifest contract every source uses, and how to extend a pack safely.
-- **[Development](https://AustralianCancerDataNetwork.github.io/ohdsi-prompt-registry/development/)** — the local loop, versioning, and the release process.
+For study-design work, see [Working on a research question](docs/research-questions.md).
 
-## Development
+- [Questions and workflow decisions](docs/interactions.md): clarification, uncertainty, and changed answers.
+- [Pack sources](docs/sources.md): shared packs, local content, and overrides.
+- [Authoring a prompt pack](docs/pack-format.md): instructions, optional explanations, and contracts.
+- [Tools and structured handoffs](docs/tool-reference.md): MCP calls and validation behaviour.
+- [Development](docs/development.md): local checks, documentation builds, and releases.
 
-```bash
-uv sync --all-extras --dev
-uv run ruff check .
-uv run ty check src/
-uv run pytest -q
-```
-
-Enable the `uv.lock` sync hook once per clone:
-
-```bash
-git config core.hooksPath .githooks
-```
-
-Contribution and labelling rules are in [.github/CONTRIBUTING.md](.github/CONTRIBUTING.md).
+Python integrations are covered by the [API reference](docs/reference.md). Contribution and labelling rules are in [.github/CONTRIBUTING.md](.github/CONTRIBUTING.md).

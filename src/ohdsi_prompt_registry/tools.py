@@ -8,6 +8,8 @@ from typing import Any
 
 from mcp.types import CallToolResult, ResourceLink
 
+from ohdsi_prompt_registry.content import get_content
+from ohdsi_prompt_registry.elicitation import validate_elicitation_response
 from ohdsi_prompt_registry.service import CATALOGUE_URI, PromptRegistryService
 
 
@@ -76,12 +78,42 @@ def _schema_reader(
     return read_schema
 
 
+def register_capability_tools(server: Any, service: PromptRegistryService) -> None:
+    """Register selected content and paired interaction checks."""
+
+    @server.tool("ohdsi_prompt_registry_get")
+    def ohdsi_prompt_registry_get(
+        pack: str,
+        key: str = "instructions",
+        kind: str = "document",
+        arguments: dict[str, str] | None = None,
+    ) -> dict[str, Any]:
+        """Read one pack item. Default: core instructions, without reference bodies.
+
+        Choose kind=document, prompt, or schema and its declared key. Prompt
+        arguments are string values. Read orientation or topic documents only
+        when needed. A complete=false result contains no usable content.
+        """
+        return get_content(service, pack, key, kind, arguments)
+
+    @server.tool("ohdsi_prompt_registry_validate_elicitation")
+    def ohdsi_prompt_registry_validate_elicitation(
+        request: str, result: str
+    ) -> dict[str, Any]:
+        """Check elicitation request/result schemas, matching IDs/revisions and choices.
+
+        Does not prove human presence, current workflow revision, or domain validity.
+        """
+        return validate_elicitation_response(service, request, result)
+
+
 def register_tools(
     server: Any,
     service: PromptRegistryService,
     readiness: Callable[[], dict[str, object]],
 ) -> None:
     """Register resource-blind discovery/link tools and readiness status."""
+    register_capability_tools(server, service)
 
     @server.tool("ohdsi_prompt_registry_catalogue")
     def ohdsi_prompt_registry_catalogue(

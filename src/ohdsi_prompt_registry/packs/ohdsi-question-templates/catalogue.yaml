@@ -5,12 +5,16 @@ templates:
       Amongst patients in the <target_cohort>, what are the patient's
       characteristics from their medical history?
     required_parameters: [target_cohort]
+    scope_notes:
+      - Characteristics include demographics, drugs, conditions, procedures, and visits.
   treatment_patterns:
     analytics_type: characterization
     question: >-
       Amongst patients in the <target_cohort>, which treatments were patients
       exposed to amongst <treatment_cohorts> and in which sequence?
     required_parameters: [target_cohort, treatment_cohorts]
+    scope_notes:
+      - Specify treatment cohorts at the required granularity, such as ingredient or class.
   outcome_incidence:
     analytics_type: characterization
     question: >-
@@ -23,6 +27,7 @@ templates:
       For people in the <nesting_cohort>, is the rate of the <outcome_cohort>
       higher or lower during the <time_at_risk> of the <target_cohort>?
     required_parameters: [nesting_cohort, outcome_cohort, time_at_risk, target_cohort]
+    nullable_parameters: [nesting_cohort]
   cohort_method:
     analytics_type: effect_estimation
     question: >-
@@ -31,10 +36,13 @@ templates:
       the <time_at_risk>?
     required_parameters:
       [nesting_cohort, target_cohort, comparator_cohort, outcome_cohort, time_at_risk]
+    nullable_parameters: [nesting_cohort]
   patient_level_prediction:
     analytics_type: patient_level_prediction
     question: >-
       For the people entering the <target_cohort>, who will go on to experience
       <outcome_cohort> during the <time_at_risk>?
     required_parameters: [target_cohort, outcome_cohort, time_at_risk]
+    scope_notes:
+      - Uses data before target-cohort entry as predictors.
 total: 6

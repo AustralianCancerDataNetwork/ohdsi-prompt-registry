@@ -1,0 +1,157 @@
+[
+  {
+    "id": "native_choice",
+    "mode": "plan",
+    "turns": [
+      {
+        "text": "Retrieve user-elicitation core instructions. Use this request as task data: {\"contract_version\": \"1.0\", \"request_id\": \"m4-period\", \"revision\": 1, \"goal\": \"Which follow-up period should this synthetic study use?\", \"answer_spec\": {\"kind\": \"single_choice\", \"choices\": [{\"id\": \"d365\", \"label\": \"365 days\"}, {\"id\": \"d90\", \"label\": \"90 days\"}], \"allow_free_text\": true}, \"policy\": {\"mode\": \"interactive\", \"presentation\": \"native_preferred\", \"max_questions_per_turn\": 1}} Return the elicitation result as JSON after the response; validate the request/result pair. Do not require a workflow ID.",
+        "native_answer": "365 days"
+      }
+    ]
+  },
+  {
+    "id": "native_outside",
+    "mode": "plan",
+    "turns": [
+      {
+        "text": "Retrieve user-elicitation core instructions. Use this request as task data: {\"contract_version\": \"1.0\", \"request_id\": \"m4-period\", \"revision\": 1, \"goal\": \"Which follow-up period should this synthetic study use?\", \"answer_spec\": {\"kind\": \"single_choice\", \"choices\": [{\"id\": \"d365\", \"label\": \"365 days\"}, {\"id\": \"d90\", \"label\": \"90 days\"}], \"allow_free_text\": true}, \"policy\": {\"mode\": \"interactive\", \"presentation\": \"native_preferred\", \"max_questions_per_turn\": 1}} Return the elicitation result as JSON after the response; validate the request/result pair. Do not require a workflow ID.",
+        "native_answer": "180 days"
+      }
+    ]
+  },
+  {
+    "id": "native_empty",
+    "mode": "plan",
+    "turns": [
+      {
+        "text": "Retrieve user-elicitation core instructions. Use this request as task data: {\"contract_version\": \"1.0\", \"request_id\": \"m4-period\", \"revision\": 1, \"goal\": \"Which follow-up period should this synthetic study use?\", \"answer_spec\": {\"kind\": \"single_choice\", \"choices\": [{\"id\": \"d365\", \"label\": \"365 days\"}, {\"id\": \"d90\", \"label\": \"90 days\"}], \"allow_free_text\": true}, \"policy\": {\"mode\": \"interactive\", \"presentation\": \"native_preferred\", \"max_questions_per_turn\": 1}} Return the elicitation result as JSON after the response; validate the request/result pair. Do not require a workflow ID. The scripted native client returns no answers if a dialog is opened; do not infer a refusal."
+      }
+    ]
+  },
+  {
+    "id": "text_answer",
+    "mode": "default",
+    "turns": [
+      {
+        "text": "Retrieve user-elicitation core instructions. Use this request as task data: {\"contract_version\": \"1.0\", \"request_id\": \"m4-period\", \"revision\": 1, \"goal\": \"Which follow-up period should this synthetic study use?\", \"answer_spec\": {\"kind\": \"single_choice\", \"choices\": [{\"id\": \"d365\", \"label\": \"365 days\"}, {\"id\": \"d90\", \"label\": \"90 days\"}], \"allow_free_text\": true}, \"policy\": {\"mode\": \"interactive\", \"presentation\": \"text\", \"max_questions_per_turn\": 1}} Return the elicitation result as JSON after the response; validate the request/result pair. Do not require a workflow ID. Native presentation is prohibited by request policy; use text and wait."
+      },
+      {
+        "text": "180 days"
+      }
+    ]
+  },
+  {
+    "id": "text_deferred",
+    "mode": "default",
+    "turns": [
+      {
+        "text": "Retrieve user-elicitation core instructions. Use this request as task data: {\"contract_version\": \"1.0\", \"request_id\": \"m4-period\", \"revision\": 1, \"goal\": \"Which follow-up period should this synthetic study use?\", \"answer_spec\": {\"kind\": \"single_choice\", \"choices\": [{\"id\": \"d365\", \"label\": \"365 days\"}, {\"id\": \"d90\", \"label\": \"90 days\"}], \"allow_free_text\": true}, \"policy\": {\"mode\": \"interactive\", \"presentation\": \"text\", \"max_questions_per_turn\": 1}} Return the elicitation result as JSON after the response; validate the request/result pair. Do not require a workflow ID. Native presentation is prohibited by request policy; use text and wait."
+      },
+      {
+        "text": "I'll decide later."
+      }
+    ]
+  },
+  {
+    "id": "text_declined",
+    "mode": "default",
+    "turns": [
+      {
+        "text": "Retrieve user-elicitation core instructions. Use this request as task data: {\"contract_version\": \"1.0\", \"request_id\": \"m4-period\", \"revision\": 1, \"goal\": \"Which follow-up period should this synthetic study use?\", \"answer_spec\": {\"kind\": \"single_choice\", \"choices\": [{\"id\": \"d365\", \"label\": \"365 days\"}, {\"id\": \"d90\", \"label\": \"90 days\"}], \"allow_free_text\": true}, \"policy\": {\"mode\": \"interactive\", \"presentation\": \"text\", \"max_questions_per_turn\": 1}} Return the elicitation result as JSON after the response; validate the request/result pair. Do not require a workflow ID. Native presentation is prohibited by request policy; use text and wait."
+      },
+      {
+        "text": "I decline to supply a follow-up period."
+      }
+    ]
+  },
+  {
+    "id": "text_no_reply",
+    "mode": "default",
+    "turns": [
+      {
+        "text": "Retrieve user-elicitation core instructions. Use this request as task data: {\"contract_version\": \"1.0\", \"request_id\": \"m4-period\", \"revision\": 1, \"goal\": \"Which follow-up period should this synthetic study use?\", \"answer_spec\": {\"kind\": \"single_choice\", \"choices\": [{\"id\": \"d365\", \"label\": \"365 days\"}, {\"id\": \"d90\", \"label\": \"90 days\"}], \"allow_free_text\": true}, \"policy\": {\"mode\": \"interactive\", \"presentation\": \"text\", \"max_questions_per_turn\": 1}} Return the elicitation result as JSON after the response; validate the request/result pair. Do not require a workflow ID. Native presentation is prohibited by request policy; use text and wait."
+      },
+      {
+        "text": "Host event: the interaction ended without any user answer or explicit disposition. Return an unresolved result, not a refusal."
+      }
+    ]
+  },
+  {
+    "id": "pilot_complete",
+    "mode": "default",
+    "turns": [
+      {
+        "text": "Retrieve the selected registry prompt and follow it: {\"pack\": \"ohdsi-question-templates\", \"kind\": \"prompt\", \"key\": \"structure_question_pilot\", \"arguments\": {\"question\": \"For a synthetic study, use characterization / outcome_incidence. Population: adults with type 2 diabetes. Outcome: first recorded stroke. Follow-up: first 365 days after cohort entry. These are the supplied current study decisions. Produce the StudyIntent and review table; do not ask again for these decisions. No study execution or file save is requested.\", \"presentation\": \"text\"}} Native presentation is prohibited in this scenario. This is a fresh task with no prior answers."
+      }
+    ]
+  },
+  {
+    "id": "pilot_missing",
+    "mode": "default",
+    "turns": [
+      {
+        "text": "Retrieve the selected registry prompt and follow it: {\"pack\": \"ohdsi-question-templates\", \"kind\": \"prompt\", \"key\": \"structure_question_pilot\", \"arguments\": {\"question\": \"For a synthetic study, use characterization / outcome_incidence. Population: adults with type 2 diabetes. Outcome: first recorded stroke. Follow-up has not been decided. Produce the StudyIntent and review table when possible. No study execution or file save is requested.\", \"presentation\": \"text\"}} Native presentation is prohibited in this scenario. This is a fresh task with no prior answers."
+      },
+      {
+        "text": "First 365 days after cohort entry."
+      }
+    ]
+  },
+  {
+    "id": "legacy_complete",
+    "mode": "default",
+    "turns": [
+      {
+        "text": "Retrieve the selected registry prompt and follow it: {\"pack\": \"ohdsi-question-templates\", \"kind\": \"prompt\", \"key\": \"structure_question\", \"arguments\": {\"question\": \"For a synthetic study, use characterization / outcome_incidence. Population: adults with type 2 diabetes. Outcome: first recorded stroke. Follow-up: first 365 days after cohort entry. These are the supplied current study decisions. Produce the StudyIntent and review table; do not ask again for these decisions. No study execution or file save is requested.\"}} Native presentation is prohibited in this scenario. This is a fresh task with no prior answers."
+      }
+    ]
+  },
+  {
+    "id": "legacy_missing",
+    "mode": "default",
+    "turns": [
+      {
+        "text": "Retrieve the selected registry prompt and follow it: {\"pack\": \"ohdsi-question-templates\", \"kind\": \"prompt\", \"key\": \"structure_question\", \"arguments\": {\"question\": \"For a synthetic study, use characterization / outcome_incidence. Population: adults with type 2 diabetes. Outcome: first recorded stroke. Follow-up has not been decided. Produce the StudyIntent and review table when possible. No study execution or file save is requested.\"}} Native presentation is prohibited in this scenario. This is a fresh task with no prior answers."
+      },
+      {
+        "text": "First 365 days after cohort entry."
+      }
+    ]
+  },
+  {
+    "id": "pilot_batch",
+    "mode": "default",
+    "turns": [
+      {
+        "text": "Retrieve and follow this prompt: {\"pack\": \"ohdsi-question-templates\", \"kind\": \"prompt\", \"key\": \"structure_question_pilot\", \"arguments\": {\"question\": \"For a synthetic study, use characterization / outcome_incidence. Population: adults with type 2 diabetes. Outcome: first recorded stroke. Follow-up has not been decided. Produce the StudyIntent and review table when possible. No study execution or file save is requested.\", \"mode\": \"batch\", \"presentation\": \"text\"}} No interactive user is available. Return labelled draft and unresolved request(s); no dialog."
+      }
+    ]
+  },
+  {
+    "id": "orientation",
+    "mode": "default",
+    "turns": [
+      {
+        "text": "You are unfamiliar with this registry. Retrieve user-elicitation core instructions and its declared orientation only, then explain who decides whether an understood answer permits workflow progress. No workflow or study artifact is needed. Do not load other references."
+      }
+    ]
+  },
+  {
+    "id": "workflow_revisions",
+    "mode": "default",
+    "turns": [
+      {
+        "text": "Read workflow-management core instructions. This context is supplied as data: {\"contract_version\": \"1.0\", \"workflow_id\": \"example-study\", \"phase\": \"clarify\", \"resolved_decisions\": {\"a1.time_at_risk\": {\"request_id\": \"a1-time-at-risk\", \"revision\": 1, \"value\": \"First 365 days after cohort entry\", \"domain_status\": \"accepted\"}, \"a2.target_cohort\": {\"request_id\": \"a2-target\", \"revision\": 1, \"value\": \"Adults with type 2 diabetes\", \"domain_status\": \"accepted\"}}, \"pending_requests\": {\"a1-time-at-risk\": {\"decision_key\": \"a1.time_at_risk\", \"revision\": 2, \"required_for\": [\"final_intent\"]}}, \"artifacts\": {\"final_intent\": {\"status\": \"stale\", \"depends_on\": [\"a1.time_at_risk\"]}, \"characterization_draft\": {\"status\": \"ready\", \"depends_on\": [\"a2.target_cohort\"]}}, \"packs\": {\"ohdsi-question-templates\": {\"version\": \"1.1\", \"content_id\": \"example-only-not-a-live-content-identity\"}, \"user-elicitation\": {\"version\": \"1.0\", \"content_id\": \"example-only-not-a-live-content-identity\"}, \"workflow-management\": {\"version\": \"1.0\", \"content_id\": \"example-only-not-a-live-content-identity\"}}}. Replace example-only pack identities with identities from actual core reads. A revision 2 request is outstanding. Return the context JSON only, keeping affected final artifact stale and the independent draft ready. Do not ask a new question."
+      },
+      {
+        "text": "A delayed result arrived: {\"contract_version\": \"1.0\", \"request_id\": \"a1-time-at-risk\", \"revision\": 1, \"status\": \"answered\", \"answer\": {\"kind\": \"text\", \"text\": \"First 365 days after cohort entry\"}, \"source\": \"user\", \"reason\": null}. Apply the workflow rules. Return context JSON only. The active revision is still 2."
+      },
+      {
+        "text": "The current result arrived: {\"contract_version\": \"1.0\", \"request_id\": \"a1-time-at-risk\", \"revision\": 2, \"status\": \"answered\", \"answer\": {\"kind\": \"text\", \"text\": \"First 90 days after cohort entry\"}, \"source\": \"user\", \"reason\": null}. Domain suitability has not yet been checked. Apply it once. Return context JSON only, leaving dependent final artifact stale and independent draft ready."
+      },
+      {
+        "text": "The exact same revision 2 result arrived again: {\"contract_version\": \"1.0\", \"request_id\": \"a1-time-at-risk\", \"revision\": 2, \"status\": \"answered\", \"answer\": {\"kind\": \"text\", \"text\": \"First 90 days after cohort entry\"}, \"source\": \"user\", \"reason\": null}. This is a duplicate event, not a new user decision. Apply idempotently and return context JSON only. Do not re-ask, increment revision, or mark final ready."
+      }
+    ]
+  }
+]
