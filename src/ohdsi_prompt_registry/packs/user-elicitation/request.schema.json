@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Elicitation request v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "request_id",
+    "revision",
+    "goal",
+    "answer_spec"
+  ],
+  "properties": {
+    "contract_version": {
+      "const": "1.0"
+    },
+    "request_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "goal": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "context": {
+      "type": "string"
+    },
+    "answer_spec": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind"
+          ],
+          "properties": {
+            "kind": {
+              "const": "text"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "choices",
+            "allow_free_text"
+          ],
+          "properties": {
+            "kind": {
+              "const": "single_choice"
+            },
+            "choices": {
+              "type": "array",
+              "minItems": 2,
+              "uniqueItems": true,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "label"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "\\S"
+                  },
+                  "label": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "\\S"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "allow_free_text": {
+              "type": "boolean"
+            }
+          }
+        }
+      ]
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "enum": [
+            "interactive",
+            "batch"
+          ]
+        },
+        "presentation": {
+          "enum": [
+            "native_preferred",
+            "text"
+          ]
+        },
+        "max_questions_per_turn": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "locale": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "tone": {
+          "enum": [
+            "concise",
+            "explanatory"
+          ]
+        }
+      }
+    }
+  }
+}

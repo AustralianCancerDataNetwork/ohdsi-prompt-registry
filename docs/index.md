@@ -1,77 +1,73 @@
 # OHDSI Prompt Registry
 
-The OHDSI Prompt Registry makes reviewed prompt workflows discoverable through Groundworkers MCP. A pack can publish instructions, JSON Schemas, examples, deterministic Markdown rendering, and an optional user-facing MCP prompt.
+Use the registry to find reusable guidance for a task and give your agent a shared way to approach it. A **prompt pack** brings together instructions and, where useful, examples, structured contracts, and review formats.
 
-To see what is available before choosing a workflow:
+For example, a research-question pack can help a team turn a study idea into an explicit question. A concept-grounding pack can guide the evidence needed for a mapping decision. The registry makes these packs available through Groundworkers; your agent carries out the conversation and uses the available tools.
 
-Call `ohdsi_prompt_registry_catalogue` with:
-
-```json
-{}
+```mermaid
+flowchart TD
+    accTitle: How a prompt pack supports a task
+    accDescr: The agent and its draft result sit inside the agentive framework, with the human and prompt pack outside it. Core instructions guide the task, explanations are read as needed, and schemas check structured outputs when provided.
+    subgraph PACK["Pack selected from the registry"]
+        CORE["Core instructions"]
+        EXTRA["Explanations and examples"]
+        SCHEMA["Schemas, when provided"]
+    end
+    subgraph FRAMEWORK["Agentive framework"]
+        AGENT["Agent<br/>Conversation and domain tools"]
+        AGENT --> RESULT["Draft or decision<br/>for your review"]
+    end
+    USER["Human in the loop<br/>Goal and context"] <-->|Questions and answers| AGENT
+    CORE -->|Guide the task| AGENT
+    EXTRA -. Read as needed .-> AGENT
+    SCHEMA -. Check structured output .-> RESULT
 ```
 
-The response lists each active pack, its scope, tags, source, documents, schemas, prompts, renderers, and advertised tool dependencies. Filter by a tag when the catalogue is large:
+## Choose guidance by the decision you need to make
 
-Call it with a tag filter:
+Start with your goal, the setting, and the result you need. Ask your agent to find a suitable pack and explain its scope before applying it:
 
-```json
-{"tags": ["concept-mapping"]}
-```
+> Find a prompt pack to help us turn our study idea into a research question. Show us which decisions it covers and what information we need to supply.
 
-Then inspect the pack’s manifest and instructions. A resource-capable client can read the URIs returned in the catalogue. A client without resource browsing can ask for links:
+The catalogue describes the packs available in your Groundworkers installation. Availability depends on your installed content and local configuration. A pack's scope matters more than a familiar name: guidance for one study setting may need different assumptions from guidance for another.
 
-Call `ohdsi_prompt_registry_links` with:
+Different packs can contribute different parts of the work:
 
-```json
-{"pack": "omop-concept-grounding"}
-```
-
-The registry also exposes a small, stable tool surface:
-
-| Tool | Use it for |
+| Need | Role of the guidance |
 | --- | --- |
-| `ohdsi_prompt_registry_catalogue` | Find packs by scope or tag. |
-| `ohdsi_prompt_registry_links` | Get the manifest, documents, and schemas for one pack. |
-| `ohdsi_prompt_registry_validate` | Check a request or result against a pack schema. |
-| `ohdsi_prompt_registry_render` | Turn a valid document into a human-readable Markdown review. |
-| `ohdsi_prompt_registry_status` | See active packs, rejected packs, overrides, and missing tool dependencies. |
+| Decide what happens next | Workflow guidance identifies prerequisites, open decisions, and dependent outputs. |
+| Clarify something with a person | User elicitation asks a focused question and records the answer or unresolved point. |
+| Make a domain decision | Domain guidance supplies relevant rules, evidence requirements, and review criteria. |
+| Pass a result to another tool or team | A structured contract defines the information the next consumer expects. |
 
-Declared workflows appear in the MCP prompt list. Current examples include:
+A workflow can use elicitation when it needs an answer. Elicitation is also useful on its own. Domain rules remain relevant whichever conversation format is used.
 
-```text
-rqt_structure_question   # bundled research-question workflow
-ocg_ground_concepts      # installed concept-grounding workflow
-gdc_classify_fields      # filesystem Groundcrew workflow
-gsc_classify_columns     # filesystem Groundcrew workflow
-```
+## Work with a pack
 
-Invoke a prompt by its published name. Prompt arguments are strings; JSON inputs are passed as JSON text:
+1. **Agree the scope.** Explain your goal, known constraints, and intended output. Check that the selected pack fits.
+2. **Resolve the necessary decisions.** Let the agent use information already supplied and ask about material gaps. State uncertainty rather than choosing an answer you cannot support.
+3. **Review the result.** Check assumptions, unresolved questions, and evidence before using an output in further work.
 
-Call `ocg_ground_concepts` with:
+You can ask for a different explanation style or more background without changing the underlying decision. You can also correct an earlier answer; the agent should identify which dependent results need review.
 
-```json
-{
-  "mapping_request": "{\"items\":[{\"item_id\":\"dx-1\",\"label\":\"Type 2 diabetes mellitus\"}]}"
-}
-```
+## Read deeper when it helps
 
-For a workflow that returns a JSON document, validate it before treating it as an operational handoff:
+Core instructions tell the agent what it needs for the task. Orientation, rationale, and longer examples can be separate references, available when an unfamiliar topic or difficult decision needs explanation.
 
-Call `ohdsi_prompt_registry_validate` with:
+The registry's selected-content tool reads one declared item at a time. It returns links to other material without fetching their bodies. This supports focused context use; the client or agent still decides which references to request.
 
-```json
-{
-  "pack": "omop-concept-grounding",
-  "schema": "mapping_decision",
-  "document": "{...}"
-}
-```
+## Understand what validation tells you
 
-The instructions in each pack state which schemas and domain tools apply. The registry supplies the current schema at read time, so the instructions and contract do not need to be kept in separate prompt copies.
+Some packs use JSON Schemas to check structured inputs and results. These checks help tools agree on fields and permitted values. Other guidance primarily shapes a decision or conversation and does not need a JSON result.
 
-## Where to go next
+A structurally valid answer still needs the relevant scientific, clinical, or operational review. An answer to a clarification question also needs to be distinguished from approval to perform an action. The registry publishes guidance and checks contracts; the calling application or agent manages execution and session state.
 
-- [Pack sources](sources.md): how bundled, installed, and filesystem packs are discovered, and which one wins when two packs share a name.
-- [Pack format](pack-format.md): the manifest contract every source uses, and how to extend a pack without breaking its consumers.
-- [Development](development.md): the local loop, and how versions and releases work.
-- [API reference](reference.md): the Python surface behind the MCP tools.
+## Find the right guide
+
+For a study-design task, start with [Working on a research question](research-questions.md).
+
+- [Questions and workflow decisions](interactions.md): how clarification, uncertainty, and changed answers fit into work.
+- [Choosing and configuring pack sources](sources.md): shared content, local customisation, and overrides.
+- [Authoring a prompt pack](pack-format.md): scope, core instructions, optional explanations, and contracts.
+- [Tools and structured handoffs](tool-reference.md): exact calls, validation behaviour, and retrieval limits.
+- [Development](development.md) and [Python API reference](reference.md): maintaining or embedding the registry.

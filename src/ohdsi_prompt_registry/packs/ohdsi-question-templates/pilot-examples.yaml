@@ -1,0 +1,146 @@
+# Illustrative study decisions and state, not a transcript or live provenance.
+# Replace example-only pack identities with identities from actual reads on resume.
+missing_parameter:
+  draft:
+    analyses:
+      - analytics_type: characterization
+        template_name: outcome_incidence
+        parameters:
+          target_cohort: Adults with type 2 diabetes
+          outcome_cohort: First recorded stroke
+          time_at_risk: null
+  request: &time_request
+    contract_version: "1.0"
+    request_id: a1-time-at-risk
+    revision: 1
+    goal: What follow-up period should the stroke incidence question cover?
+    context: The population and outcome are supplied; the follow-up period is undecided.
+    answer_spec: {kind: text}
+    policy:
+      mode: interactive
+      presentation: native_preferred
+      max_questions_per_turn: 1
+  answered: &time_answer
+    contract_version: "1.0"
+    request_id: a1-time-at-risk
+    revision: 1
+    status: answered
+    answer: {kind: text, text: First 365 days after cohort entry}
+    source: user
+    reason: null
+  final:
+    analyses:
+      - analytics_type: characterization
+        template_name: outcome_incidence
+        parameters:
+          target_cohort: Adults with type 2 diabetes
+          outcome_cohort: First recorded stroke
+          time_at_risk: First 365 days after cohort entry
+  next_step: Check the answer's domain suitability before updating the final artifact.
+
+non_answers:
+  request: *time_request
+  deferred:
+    contract_version: "1.0"
+    request_id: a1-time-at-risk
+    revision: 1
+    status: deferred
+    answer: null
+    source: user
+    reason: The user will decide after consulting the study team.
+  declined:
+    contract_version: "1.0"
+    request_id: a1-time-at-risk
+    revision: 1
+    status: declined
+    answer: null
+    source: user
+    reason: The user explicitly declined to specify the follow-up period.
+  cancelled:
+    contract_version: "1.0"
+    request_id: a1-time-at-risk
+    revision: 1
+    status: unresolved
+    answer: null
+    source: none
+    reason: The dialog closed without an answer or explicit disposition.
+  batch_request:
+    <<: *time_request
+    policy: {mode: batch, presentation: text}
+  batch_result:
+    contract_version: "1.0"
+    request_id: a1-time-at-risk
+    revision: 1
+    status: unresolved
+    answer: null
+    source: none
+    reason: No interactive user is available to supply the missing period.
+  next_step: Retain the labelled draft and leave dependent finalization pending.
+
+revised_answer:
+  request:
+    <<: *time_request
+    revision: 2
+    goal: What follow-up period should replace the previously selected 365 days?
+    context: The user is revising the period; the previous final artifact is stale.
+  stale_reply: *time_answer
+  current_reply:
+    <<: *time_answer
+    revision: 2
+    answer: {kind: text, text: First 90 days after cohort entry}
+  context:
+    contract_version: "1.0"
+    workflow_id: example-study
+    phase: clarify
+    resolved_decisions:
+      a1.time_at_risk:
+        request_id: a1-time-at-risk
+        revision: 1
+        value: First 365 days after cohort entry
+        domain_status: accepted
+      a2.target_cohort:
+        request_id: a2-target
+        revision: 1
+        value: Adults with type 2 diabetes
+        domain_status: accepted
+    pending_requests:
+      a1-time-at-risk:
+        decision_key: a1.time_at_risk
+        revision: 2
+        required_for: [final_intent]
+    artifacts:
+      final_intent:
+        status: stale
+        depends_on: [a1.time_at_risk]
+      characterization_draft:
+        status: ready
+        depends_on: [a2.target_cohort]
+    packs:
+      ohdsi-question-templates:
+        version: "1.1"
+        content_id: example-only-not-a-live-content-identity
+      user-elicitation:
+        version: "1.0"
+        content_id: example-only-not-a-live-content-identity
+      workflow-management:
+        version: "1.0"
+        content_id: example-only-not-a-live-content-identity
+  next_steps:
+    - Reject the stale reply; the pair's revision does not match the active request.
+    - Apply the current reply once, then domain-check it; an identical duplicate has no additional effect.
+    - Rebuild and revalidate final_intent with 90 days; preserve characterization_draft.
+    - A conflicting duplicate needs clarification and cannot overwrite the current decision.
+
+intentional_null:
+  final:
+    analyses:
+      - analytics_type: effect_estimation
+        template_name: cohort_method
+        parameters:
+          nesting_cohort: null
+          target_cohort: New users of treatment A
+          comparator_cohort: New users of active treatment B for the same indication
+          outcome_cohort: First occurrence of the agreed outcome
+          time_at_risk: During the agreed treatment exposure period
+          treatment_cohorts: null
+  explanation: The user explicitly chose no nesting restriction. Null is permitted for this field by the catalogue, not a substitute for an unanswered question.

@@ -31,6 +31,23 @@ EXPECTED_URIS = {
     "prompt-registry://ohdsi-question-templates/instructions",
     "prompt-registry://ohdsi-question-templates/catalogue",
     "prompt-registry://ohdsi-question-templates/schema/study_intent",
+    "prompt-registry://ohdsi-question-templates/schema/study_intent_final",
+    "prompt-registry://ohdsi-question-templates/pilot_instructions",
+    "prompt-registry://ohdsi-question-templates/pilot_examples",
+}
+
+
+CAPABILITY_URIS = {
+    f"prompt-registry://{pack}/{key}"
+    for pack in ("user-elicitation", "workflow-management")
+    for key in (
+        "manifest", "instructions", "orientation", "answer_changes",
+        "client_adapters", "examples",
+    )
+} | {
+    "prompt-registry://user-elicitation/schema/request",
+    "prompt-registry://user-elicitation/schema/result",
+    "prompt-registry://workflow-management/schema/context",
 }
 
 
@@ -108,8 +125,8 @@ def test_real_server_registration_is_exact_and_described() -> None:
 
     plugin.register(server, state)
 
-    assert set(server.list_resources()) == EXPECTED_URIS
-    assert len(server.list_resources()) == len(EXPECTED_URIS)
+    assert set(server.list_resources()) == EXPECTED_URIS | CAPABILITY_URIS
+    assert len(server.list_resources()) == len(EXPECTED_URIS | CAPABILITY_URIS)
     descriptions = server.describe_resources()
     assert descriptions[
         "prompt-registry://ohdsi-question-templates/instructions"
@@ -120,8 +137,14 @@ def test_real_server_registration_is_exact_and_described() -> None:
         "ohdsi_prompt_registry_render",
         "ohdsi_prompt_registry_status",
         "ohdsi_prompt_registry_validate",
+        "ohdsi_prompt_registry_get",
+        "ohdsi_prompt_registry_validate_elicitation",
     }
+    assert not {"ohdsi_prompt_registry_validate_study_intent", "ohdsi_prompt_registry_render_study_intent"}.intersection(server.list_tools())
     assert "rqt_structure_question" in server.list_prompts()
+    assert "rqt_structure_question_pilot" in server.list_prompts()
+    assert "ue_elicit" in server.list_prompts()
+    assert "wm_coordinate" in server.list_prompts()
     prompt_description = server.describe_prompts()["rqt_structure_question"]
     assert prompt_description["title"] == "Structure an OHDSI research question"
     assert prompt_description["arguments"] == [
@@ -148,8 +171,10 @@ def test_real_server_registration_is_exact_and_described() -> None:
     assert {str(link.uri) for link in links.content} == (
         EXPECTED_URIS - {"prompt-registry://catalogue"}
     )
-    assert len(links.structuredContent["links"]) == 4
-    assert catalogue["packs"][0]["prompt_keys"] == ["structure_question"]
+    assert len(links.structuredContent["links"]) == 7
+    assert catalogue["packs"][0]["prompt_keys"] == [
+        "structure_question", "structure_question_pilot"
+    ]
 
     prompt = server.call_prompt(
         "rqt_structure_question",
@@ -266,8 +291,77 @@ def test_prompt_is_published_over_the_mcp_protocol(
             assert result.messages[0].role == "user"
             assert result.messages[0].content.type == "text"
             assert "Does treatment work?" in result.messages[0].content.text
+            await _assert_capability_protocol(session)
+            await _assert_research_pilot_protocol(session)
 
     asyncio.run(exercise_protocol())
+
+
+async def _assert_capability_protocol(session) -> None:
+    content = await session.call_tool(
+        "ohdsi_prompt_registry_get", {"pack": "user-elicitation"}
+    )
+    assert not content.isError
+    assert content.structuredContent is not None
+    assert content.structuredContent["complete"] is True
+    assert content.structuredContent["content"].startswith("# User elicitation")
+    examples = await session.call_tool(
+        "ohdsi_prompt_registry_get", {"pack": "user-elicitation", "key": "examples"}
+    )
+    pair = examples.structuredContent["content"]["choice"]
+    pair["result"]["answer"]["choice_id"] = "not-offered"
+    checked = await session.call_tool(
+        "ohdsi_prompt_registry_validate_elicitation",
+        {"request": json.dumps(pair["request"]), "result": json.dumps(pair["result"])},
+    )
+    assert not checked.isError
+    assert checked.structuredContent["valid"] is False
+
+
+async def _assert_research_pilot_protocol(session) -> None:
+    listed = await session.list_prompts()
+    published = next(
+        prompt for prompt in listed.prompts if prompt.name == "rqt_structure_question_pilot"
+    )
+    assert [argument.name for argument in published.arguments] == [
+        "question", "context", "draft", "mode", "presentation"
+    ]
+    resolved = await session.get_prompt(
+        "rqt_structure_question_pilot",
+        arguments={"question": "Describe the supplied population.", "mode": "batch"},
+    )
+    assert resolved.messages[0].content.type == "text"
+    assert "Describe the supplied population." in resolved.messages[0].content.text
+    checked = await session.call_tool(
+        "ohdsi_prompt_registry_validate", {"pack": "ohdsi-question-templates", "schema": "study_intent_final", "document": '{"analyses":[]}'}
+    )
+    assert not checked.isError
+    assert checked.structuredContent["valid"] is False
+    assert checked.structuredContent["errors"][0]["path"] == "$.analyses"
+    incomplete = await session.call_tool(
+        "ohdsi_prompt_registry_render",
+        {"pack": "ohdsi-question-templates", "render": "study_intent_final", "document": '{"analyses":[]}'},
+    )
+    assert not incomplete.isError
+    assert incomplete.structuredContent["result"]["valid"] is False
+    complete = {
+        "analyses": [{
+            "analytics_type": "characterization",
+            "template_name": "patient_characterization",
+            "parameters": {"target_cohort": "Adults supplied by the user"},
+        }]
+    }
+    checked = await session.call_tool(
+        "ohdsi_prompt_registry_validate", {"pack": "ohdsi-question-templates", "schema": "study_intent_final", "document": json.dumps(complete)}
+    )
+    assert not checked.isError
+    assert checked.structuredContent == {"valid": True, "errors": []}
+    rendered = await session.call_tool(
+        "ohdsi_prompt_registry_render",
+        {"pack": "ohdsi-question-templates", "render": "study_intent_final", "document": json.dumps(complete)},
+    )
+    assert not rendered.isError
+    assert "Adults supplied by the user" in rendered.content[0].text
 
 
 def test_tool_readiness_is_independent_of_plugin_registration_order() -> None:
@@ -304,6 +398,8 @@ def test_readiness_matrix(tmp_path: Path, monkeypatch) -> None:
     active.available_tools = lambda: {
         "comparator_recommender_find_target",
         "comparator_recommender_recommend",
+        "ohdsi_prompt_registry_validate",
+        "ohdsi_prompt_registry_validate_elicitation",
     }
     active_report = plugin.verify_readiness(active)
     assert active_report.state.value == "ready"
@@ -317,7 +413,9 @@ def test_readiness_matrix(tmp_path: Path, monkeypatch) -> None:
         field for field in active_report.fields if field.key == "source_bundled"
     )
     assert bundled_packs.detail == (
-        "OHDSI research question templates (ohdsi-question-templates)"
+        "OHDSI research question templates (ohdsi-question-templates); "
+        "User elicitation (user-elicitation); "
+        "Workflow management (workflow-management)"
     )
     pack = next(
         field
@@ -327,9 +425,9 @@ def test_readiness_matrix(tmp_path: Path, monkeypatch) -> None:
     assert pack.label == "Pack: OHDSI research question templates"
     assert pack.value == "bundled"
     assert pack.detail is not None
-    assert "Documents: instructions, catalogue." in pack.detail
-    assert "Schemas: study_intent." in pack.detail
-    assert "Renderers: study_intent." in pack.detail
+    assert "Documents: instructions, catalogue, pilot_instructions, pilot_examples." in pack.detail
+    assert "Schemas: study_intent, study_intent_final." in pack.detail
+    assert "Renderers: study_intent, study_intent_final." in pack.detail
 
     standalone = _build(OhdsiPromptRegistryConfig())
     standalone_report = plugin.verify_readiness(standalone).as_dict()

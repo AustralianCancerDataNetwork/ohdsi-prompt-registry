@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Elicitation result v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "request_id",
+    "revision",
+    "status",
+    "answer",
+    "source",
+    "reason"
+  ],
+  "properties": {
+    "contract_version": {
+      "const": "1.0"
+    },
+    "request_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "status": {
+      "enum": [
+        "answered",
+        "deferred",
+        "declined",
+        "unresolved"
+      ]
+    },
+    "answer": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/answer"
+        }
+      ]
+    },
+    "source": {
+      "enum": [
+        "user",
+        "none"
+      ]
+    },
+    "reason": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "answered"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "answer": {
+            "$ref": "#/$defs/answer"
+          },
+          "source": {
+            "const": "user"
+          },
+          "reason": {
+            "type": "null"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "answer": {
+            "type": "null"
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "declined",
+              "deferred"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "source": {
+            "const": "user"
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "answer": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "text"
+          ],
+          "properties": {
+            "kind": {
+              "const": "text"
+            },
+            "text": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "choice_id"
+          ],
+          "properties": {
+            "kind": {
+              "const": "single_choice"
+            },
+            "choice_id": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

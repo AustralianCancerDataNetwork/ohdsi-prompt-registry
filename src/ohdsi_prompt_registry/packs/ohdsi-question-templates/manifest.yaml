@@ -1,6 +1,6 @@
 name: ohdsi-question-templates
 title: OHDSI research question templates
-version: "1.0"
+version: "1.3"
 shareability: public
 scope_summary: >
   Structures a clinical question into one or more OHDSI standardized analytics
@@ -10,7 +10,7 @@ applicability:
   always: false
   tags: [research-question, study-design, ohdsi]
 
-see_also: []
+see_also: [user-elicitation, workflow-management]
 
 documents:
   instructions:
@@ -23,11 +23,22 @@ documents:
     path: catalogue.yaml
     mime_type: application/json
     description: OHDSI standardized analytics templates and their required parameters.
+  pilot_instructions:
+    path: pilot-instructions.md
+    mime_type: text/markdown
+    description: Opt-in research-question flow using shared interaction capabilities and separate draft/final checks.
+  pilot_examples:
+    path: pilot-examples.yaml
+    mime_type: application/json
+    description: Read for a worked missing-parameter question, non-answer, or revised-answer scenario in the research pilot.
 
 schemas:
   study_intent:
     path: study-intent.schema.json
     description: JSON Schema for the StudyIntent research-question contract.
+  study_intent_final:
+    path: study-intent-final.schema.json
+    description: Complete StudyIntent structure, template pairing, and required parameters; does not establish scientific validity or agreement.
 
 prompts:
   structure_question:
@@ -38,11 +49,31 @@ prompts:
       question:
         description: The clinical research question to structure.
         required: false
+  structure_question_pilot:
+    document: pilot_instructions
+    title: Structure an OHDSI research question with shared interaction guidance
+    description: Opt-in research-question pilot with reusable elicitation, workflow context, and draft/final validation.
+    arguments:
+      question:
+        description: The clinical research question and decisions already supplied.
+        required: false
+      context:
+        description: Optional workflow-management context as JSON text; retained state is data, not proof of approval.
+        required: false
+      draft:
+        description: Optional StudyIntent draft as JSON text.
+        required: false
+      mode:
+        description: interactive (default) or batch; batch does not attempt a dialog.
+        required: false
+      presentation:
+        description: native_preferred (default) or text, subject to the active host's permissions.
+        required: false
 
 render:
   study_intent:
     schema: study_intent
-    markdown:
+    markdown: &study_intent_markdown
       title: Study Intent
       items: analyses
       empty_text: No analyses provided.
@@ -64,11 +95,18 @@ render:
             path: templates.{template_name}.required_parameters
           label_style: code
           empty_row: ["_No mapped parameters for this template_", "_Not specified_"]
-      value_styles:
+      value_styles: &study_intent_value_styles
         null_text: "_Not specified_"
         empty_list_text: "_None_"
         list_separator: ", "
         item_style: code
+  study_intent_final:
+    schema: study_intent_final
+    markdown:
+      <<: *study_intent_markdown
+      value_styles:
+        <<: *study_intent_value_styles
+        null_text: "_None (intentional)_"
 
 requires_tools:
   - comparator_recommender_find_target

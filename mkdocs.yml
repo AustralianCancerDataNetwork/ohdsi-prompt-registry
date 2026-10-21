@@ -22,7 +22,11 @@ markdown_extensions:
   - pymdownx.highlight
   - pymdownx.inlinehilite
   - pymdownx.details
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - toc:
       permalink: true
 
@@ -43,7 +47,12 @@ plugins:
 
 nav:
   - Home: index.md
-  - Pack sources: sources.md
-  - Pack format: pack-format.md
+  - Using packs:
+      - Working on a research question: research-questions.md
+      - Questions and workflow decisions: interactions.md
+      - Choosing pack sources: sources.md
+  - Authoring packs: pack-format.md
+  - Reference:
+      - Tools and structured handoffs: tool-reference.md
+      - Python API: reference.md
   - Development: development.md
-  - API reference: reference.md

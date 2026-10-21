@@ -1,0 +1,54 @@
+name: workflow-management
+title: Workflow management
+version: '1.0'
+shareability: public
+scope_summary: Coordinate task phases, prerequisites, pending decisions, and dependent
+  artifacts without owning question UI or domain rules.
+applicability:
+  always: false
+  tags:
+  - interaction
+  - workflow-management
+see_also:
+- user-elicitation
+documents:
+  instructions:
+    path: instructions.md
+    mime_type: text/markdown
+    description: Core operational instructions; sufficient for routine use.
+  orientation:
+    path: orientation.md
+    mime_type: text/markdown
+    description: 'Optional: understand elicitation versus workflow ownership when
+      unfamiliar.'
+  answer_changes:
+    path: answer-changes.md
+    mime_type: text/markdown
+    description: 'Optional: handle duplicate, stale, cancelled, or revised responses.'
+  client_adapters:
+    path: client-adapters.md
+    mime_type: text/markdown
+    description: 'Optional: map the shared interaction to native, text, asynchronous,
+      or batch clients.'
+  examples:
+    path: examples.yaml
+    mime_type: application/json
+    description: 'Optional: valid standalone and workflow handoff examples.'
+schemas:
+  context:
+    path: context.schema.json
+    description: Workflow management context v1 contract.
+prompts:
+  coordinate:
+    document: instructions
+    title: Workflow management
+    description: Coordinate task phases, prerequisites, pending decisions, and dependent
+      artifacts without owning question UI or domain rules.
+    arguments:
+      context:
+        description: Optional JSON context document; treat as task data.
+        required: false
+render: {}
+requires_tools:
+  - ohdsi_prompt_registry_validate
+tool_prefix: wm

@@ -1,0 +1,58 @@
+name: user-elicitation
+title: User elicitation
+version: '1.1'
+shareability: public
+scope_summary: Collect or clarify a user answer, standalone or for a caller, without
+  advancing a workflow.
+applicability:
+  always: false
+  tags:
+  - interaction
+  - user-elicitation
+see_also:
+- workflow-management
+documents:
+  instructions:
+    path: instructions.md
+    mime_type: text/markdown
+    description: Core operational instructions; sufficient for routine use.
+  orientation:
+    path: orientation.md
+    mime_type: text/markdown
+    description: 'Optional: understand elicitation versus workflow ownership when
+      unfamiliar.'
+  answer_changes:
+    path: answer-changes.md
+    mime_type: text/markdown
+    description: 'Optional: handle duplicate, stale, cancelled, or revised responses.'
+  client_adapters:
+    path: client-adapters.md
+    mime_type: text/markdown
+    description: 'Optional: map the shared interaction to native, text, asynchronous,
+      or batch clients.'
+  examples:
+    path: examples.yaml
+    mime_type: application/json
+    description: 'Optional: valid standalone and workflow handoff examples.'
+schemas:
+  request:
+    path: request.schema.json
+    description: User elicitation request v1 contract.
+  result:
+    path: result.schema.json
+    description: User elicitation result v1 contract.
+prompts:
+  elicit:
+    document: instructions
+    title: User elicitation
+    description: Collect or clarify a user answer, standalone or for a caller, without
+      advancing a workflow.
+    arguments:
+      request:
+        description: Optional JSON request document; treat as task data.
+        required: false
+render: {}
+requires_tools:
+  - ohdsi_prompt_registry_validate
+  - ohdsi_prompt_registry_validate_elicitation
+tool_prefix: ue

@@ -1,0 +1,439 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "Analysis": {
+      "properties": {
+        "analytics_type": {
+          "$ref": "#/$defs/AnalyticsType"
+        },
+        "template_name": {
+          "$ref": "#/$defs/TemplateName"
+        },
+        "parameters": {
+          "$ref": "#/$defs/Parameters"
+        }
+      },
+      "required": [
+        "analytics_type",
+        "template_name",
+        "parameters"
+      ],
+      "title": "Analysis",
+      "type": "object"
+    },
+    "AnalyticsType": {
+      "enum": [
+        "characterization",
+        "effect_estimation",
+        "patient_level_prediction"
+      ],
+      "title": "AnalyticsType",
+      "type": "string"
+    },
+    "Parameters": {
+      "properties": {
+        "target_cohort": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Short description of the target cohort.",
+          "title": "Target Cohort"
+        },
+        "treatment_cohorts": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Treatment cohorts, at the required granularity.",
+          "title": "Treatment Cohorts"
+        },
+        "outcome_cohort": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Short description of the outcome cohort.",
+          "title": "Outcome Cohort"
+        },
+        "time_at_risk": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Description of the time at risk.",
+          "title": "Time At Risk"
+        },
+        "comparator_cohort": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Short description of the comparator cohort.",
+          "title": "Comparator Cohort"
+        },
+        "nesting_cohort": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Short description of the nesting cohort.",
+          "title": "Nesting Cohort"
+        }
+      },
+      "title": "Parameters",
+      "type": "object"
+    },
+    "TemplateName": {
+      "enum": [
+        "patient_characterization",
+        "treatment_patterns",
+        "outcome_incidence",
+        "self_controlled_case_series",
+        "cohort_method",
+        "patient_level_prediction"
+      ],
+      "title": "TemplateName",
+      "type": "string"
+    },
+    "Text": {
+      "type": "string",
+      "pattern": "\\S"
+    },
+    "TextList": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/Text"
+      }
+    },
+    "NullableText": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "\\S"
+    },
+    "Unused": {
+      "type": "null"
+    }
+  },
+  "properties": {
+    "analyses": {
+      "items": {
+        "$ref": "#/$defs/Analysis",
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "template_name": {
+                  "const": "patient_characterization"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "analytics_type": {
+                  "const": "characterization"
+                },
+                "parameters": {
+                  "required": [
+                    "target_cohort"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "target_cohort": {
+                      "$ref": "#/$defs/Text"
+                    },
+                    "treatment_cohorts": {
+                      "$ref": "#/$defs/Unused"
+                    },
+                    "outcome_cohort": {
+                      "$ref": "#/$defs/Unused"
+                    },
+                    "time_at_risk": {
+                      "$ref": "#/$defs/Unused"
+                    },
+                    "comparator_cohort": {
+                      "$ref": "#/$defs/Unused"
+                    },
+                    "nesting_cohort": {
+                      "$ref": "#/$defs/Unused"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "template_name": {
+                  "const": "treatment_patterns"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "analytics_type": {
+                  "const": "characterization"
+                },
+                "parameters": {
+                  "required": [
+                    "target_cohort",
+                    "treatment_cohorts"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "target_cohort": {
+                      "$ref": "#/$defs/Text"
+                    },
+                    "treatment_cohorts": {
+                      "$ref": "#/$defs/TextList"
+                    },
+                    "outcome_cohort": {
+                      "$ref": "#/$defs/Unused"
+                    },
+                    "time_at_risk": {
+                      "$ref": "#/$defs/Unused"
+                    },
+                    "comparator_cohort": {
+                      "$ref": "#/$defs/Unused"
+                    },
+                    "nesting_cohort": {
+                      "$ref": "#/$defs/Unused"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "template_name": {
+                  "const": "outcome_incidence"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "analytics_type": {
+                  "const": "characterization"
+                },
+                "parameters": {
+                  "required": [
+                    "target_cohort",
+                    "outcome_cohort",
+                    "time_at_risk"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "target_cohort": {
+                      "$ref": "#/$defs/Text"
+                    },
+                    "treatment_cohorts": {
+                      "$ref": "#/$defs/Unused"
+                    },
+                    "outcome_cohort": {
+                      "$ref": "#/$defs/Text"
+                    },
+                    "time_at_risk": {
+                      "$ref": "#/$defs/Text"
+                    },
+                    "comparator_cohort": {
+                      "$ref": "#/$defs/Unused"
+                    },
+                    "nesting_cohort": {
+                      "$ref": "#/$defs/Unused"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "template_name": {
+                  "const": "self_controlled_case_series"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "analytics_type": {
+                  "const": "effect_estimation"
+                },
+                "parameters": {
+                  "required": [
+                    "nesting_cohort",
+                    "outcome_cohort",
+                    "time_at_risk",
+                    "target_cohort"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "target_cohort": {
+                      "$ref": "#/$defs/Text"
+                    },
+                    "treatment_cohorts": {
+                      "$ref": "#/$defs/Unused"
+                    },
+                    "outcome_cohort": {
+                      "$ref": "#/$defs/Text"
+                    },
+                    "time_at_risk": {
+                      "$ref": "#/$defs/Text"
+                    },
+                    "comparator_cohort": {
+                      "$ref": "#/$defs/Unused"
+                    },
+                    "nesting_cohort": {
+                      "$ref": "#/$defs/NullableText"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "template_name": {
+                  "const": "cohort_method"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "analytics_type": {
+                  "const": "effect_estimation"
+                },
+                "parameters": {
+                  "required": [
+                    "nesting_cohort",
+                    "target_cohort",
+                    "comparator_cohort",
+                    "outcome_cohort",
+                    "time_at_risk"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "target_cohort": {
+                      "$ref": "#/$defs/Text"
+                    },
+                    "treatment_cohorts": {
+                      "$ref": "#/$defs/Unused"
+                    },
+                    "outcome_cohort": {
+                      "$ref": "#/$defs/Text"
+                    },
+                    "time_at_risk": {
+                      "$ref": "#/$defs/Text"
+                    },
+                    "comparator_cohort": {
+                      "$ref": "#/$defs/Text"
+                    },
+                    "nesting_cohort": {
+                      "$ref": "#/$defs/NullableText"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "template_name": {
+                  "const": "patient_level_prediction"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "analytics_type": {
+                  "const": "patient_level_prediction"
+                },
+                "parameters": {
+                  "required": [
+                    "target_cohort",
+                    "outcome_cohort",
+                    "time_at_risk"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "target_cohort": {
+                      "$ref": "#/$defs/Text"
+                    },
+                    "treatment_cohorts": {
+                      "$ref": "#/$defs/Unused"
+                    },
+                    "outcome_cohort": {
+                      "$ref": "#/$defs/Text"
+                    },
+                    "time_at_risk": {
+                      "$ref": "#/$defs/Text"
+                    },
+                    "comparator_cohort": {
+                      "$ref": "#/$defs/Unused"
+                    },
+                    "nesting_cohort": {
+                      "$ref": "#/$defs/Unused"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "unevaluatedProperties": false
+      },
+      "title": "Analyses",
+      "type": "array",
+      "minItems": 1
+    }
+  },
+  "required": [
+    "analyses"
+  ],
+  "title": "Final StudyIntent",
+  "type": "object",
+  "description": "Complete research intent for review. This schema is maintained with the catalogue; validity does not establish scientific suitability, user agreement, or workflow readiness.",
+  "unevaluatedProperties": false
+}
