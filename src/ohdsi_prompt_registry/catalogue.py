@@ -117,6 +117,8 @@ def _validate_placeholders(manifest: PackManifest, root: Traversable) -> None:
     recognised = re.compile(r"\{\{schema:([A-Za-z_]\w*)\}\}")
     any_placeholder = re.compile(r"\{\{.*?\}\}", re.DOTALL)
     for key, spec in manifest.documents.items():
+        if spec.mime_type == "application/json":
+            continue
         text = _read_text(root, spec.path)
         for token in any_placeholder.findall(text):
             match = recognised.fullmatch(token)
